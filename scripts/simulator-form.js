@@ -19,9 +19,11 @@ class CombatSimulatorApplication extends Application {
             }
           })
 
+          console.log("Party members");
           this.party.forEach((pc, i) => {
               console.log(pc.name);
           });
+          console.log("Opponents");
           this.opponents.forEach((npc, i) => {
               console.log(npc.name);
           });
