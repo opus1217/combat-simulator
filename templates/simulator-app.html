@@ -1,0 +1,46 @@
+<form>
+    <div id="CS5eContainers">
+        <fieldset class="group-container ally-container">
+            <legend class='group-legend'>PC Party</legend>
+            <div class="group-field ally-field">
+                {{#each party}}
+                    <div class='actor-container'>
+                        <label>{{this.name}}</label/>
+                    </div>
+                {{/each}}
+            </div>
+        </fieldset>
+
+        <div class="center-container">
+            <div class="difficulty-rating">
+                <h1>Placeholder</h1>
+            </div>
+        </div>
+
+        <fieldset class="group-container opponent-container">
+            <legend class='group-legend'>Opponents</legend>
+            <div class="group-field opponent-field">
+                {{#each opponents}}
+                    <div class='actor-container'>
+                        <label>{{this.name}}</label/>
+                    </div>
+                {{/each}}
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="CS5eXP">
+        <div class='scores'>
+            <h2>
+                Total XP: {{this.totalxp}}
+            </h2>
+
+            <h3>
+                XP / player: {{this.allyxp}}
+            </h3>
+        </div>
+        <button class='clear' type='button'>
+            clear
+        </button>
+    </div>
+</form>

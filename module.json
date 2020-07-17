@@ -1,0 +1,26 @@
+{
+  "name": "combat-simulator",
+  "title": "Combat Simulator for 5e",
+  "description": "No more TPKs or Walkovers - tune your encounters to be challenging and exciting!",
+  "author" : "Spetzel",
+  "authors": [
+    {
+      "name": "Spetzel",
+      "email": "support@combatsimulatorfor5e.com",
+      "url": "https://combatsimulatorfor5e.com"
+    }
+  ],
+  "version": "0.1.0",
+  "minimumCoreVersion": "0.6.0",
+  "compatibleCoreVersion": "0.6.5",
+  "languages": [{
+    "lang": "en",
+    "name": "English",
+    "path": "lang/en.json"
+  }],
+  "system": "dnd5e",
+  "readme": "https://readme.combatsimulatorfor5e.com",
+  "bugs": "https://bugs.combatsimulatorfor5e.com",
+  "changelog": "https://changelog.combatsimulatorfor5e.com",
+  "scripts" : ["scripts/simulator.js","scripts/simulator-form.js"]
+}
