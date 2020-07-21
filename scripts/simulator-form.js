@@ -1,3 +1,6 @@
+const FRIENDLY = 1;
+const HOSTILE = -1
+
 class CombatSimulatorApplication extends Application {
     constructor(Combat, options = {}) {
         super(options);
@@ -8,26 +11,36 @@ class CombatSimulatorApplication extends Application {
           console.log(this.currentCombat);
           this.combatants = this.currentCombat.data.combatants;
 
-          this.party = [];
-          this.opponents = [];
+          this.friendly = [];
+          this.hostile = [];
 
           this.combatants.forEach(combatant => {
-            if (combatant.actor.data.type === "character") {
-              this.party.push(combatant);
-            } else {
-              this.opponents.push(combatant);
+            if (combatant.token.disposition === FRIENDLY) {
+              this.friendly.push(combatant);
+            } else if (combatant.token.disposition === HOSTILE) {
+              this.hostile.push(combatant);
             }
           })
 
-          console.log("Party members");
-          this.party.forEach((pc, i) => {
+          console.log(game.i18n.localize("CS5e.TOKEN.Friendly"));
+          this.friendly.forEach((pc, i) => {
               console.log(pc.name);
           });
-          console.log("Opponents");
-          this.opponents.forEach((npc, i) => {
+          console.log(game.i18n.localize("CS5e.TOKEN.Hostile"));
+          this.hostile.forEach((npc, i) => {
               console.log(npc.name);
           });
 
+          this.allyRating = {
+              "easy": 0,
+              "medium": 0,
+              "hard": 0,
+              "deadly": 0
+          };
+          this.totalXP = 0;
+          this.perAllyXP = 0;
+          this.dailyXP = 0;
+          this.combatDifficulty = "trivial";
 
           game.users.apps.push(this)
         } else {
@@ -50,8 +63,8 @@ class CombatSimulatorApplication extends Application {
 
     async getData() {
         return {
-            party: this.party,
-            opponents: this.opponents,
+            friendly: this.friendly,
+            hostile: this.hostile,
             ratings: this.allyRating,
             allyxp: this.perAllyXP,
             totalxp: this.totalXP,

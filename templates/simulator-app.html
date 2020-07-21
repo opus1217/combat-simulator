@@ -1,35 +1,42 @@
 <form>
-    <div id="CS5eContainers">
+    <div id="CSContainers">
         <fieldset class="group-container ally-container">
-            <legend class='group-legend'>PC Party</legend>
+            <legend class='group-legend'>Friendly</legend>
             <div class="group-field ally-field">
-                {{#each party}}
-                    <div class='actor-container'>
-                        <label>{{this.name}}</label/>
-                    </div>
+                {{#each friendly}}
+                    <label>{{this.name}}</label>
                 {{/each}}
             </div>
         </fieldset>
 
         <div class="center-container">
             <div class="difficulty-rating">
-                <h1>Placeholder</h1>
+                <h1>Difficulty</h1>
+            </div>
+            <div class="difficulty-threshold">
+                {{#with ratings}}
+                    <label>Easy: {{easy}} XP</label>
+                    <label>Medium: {{medium}} XP</label>
+                    <label>Hard: {{hard}} XP</label>
+                    <label>Deadly: {{deadly}} XP</label>
+                {{/with}}
+            </div>
+            <div class="daily-budget">
+                <label>Daily Budget: {{dailyxp}} XP</label>
             </div>
         </div>
 
         <fieldset class="group-container opponent-container">
-            <legend class='group-legend'>Opponents</legend>
+            <legend class='group-legend'>Hostile</legend>
             <div class="group-field opponent-field">
-                {{#each opponents}}
-                    <div class='actor-container'>
-                        <label>{{this.name}}</label/>
-                    </div>
+                {{#each hostile}}
+                    <label>{{this.name}}</label>
                 {{/each}}
             </div>
         </fieldset>
     </div>
 
-    <div id="CS5eXP">
+    <div id="CSXP">
         <div class='scores'>
             <h2>
                 Total XP: {{this.totalxp}}

@@ -1,39 +1,39 @@
-#CS5eContainers {
+#CSContainers {
     display: flex;
     height: auto;
     width: 100%;
     min-height: 200px;
 }
-#CS5eContainers .group-container {
+#CSContainers .group-container {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     width: 30%;
 }
-#CS5eContainers .group-legend {
+#CSContainers .group-legend {
     width: auto;
     margin-left: auto;
     margin-right: auto;
 }
-#CS5eContainers .center-container {
+#CSContainers .center-container {
     width: 50%;
 }
-#CS5eContainers .group-field {
+#CSContainers .group-field {
     display: flex;
     flex-wrap: wrap;
     position: relative;
 }
-#CS5eContainers .actor-container {
+#CSContainers .actor-container {
     opacity: 1;
     position: relative;
     margin: 0 auto;
 }
-#CS5eContainers .actor-portrait {
+#CSContainers .actor-portrait {
     width: 50px;
     height: 50px;
 }
-#CS5eContainers .actor-subtract {
+#CSContainers .actor-subtract {
     opacity: 0;
     position: absolute;
     top: 50%;
@@ -41,41 +41,41 @@
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
 }
-#CS5eContainers .actor-container:hover .actor-portrait {
+#CSContainers .actor-container:hover .actor-portrait {
     opacity: 0.3;
 }
-#CS5eContainers .actor-container:hover .actor-subtract {
+#CSContainers .actor-container:hover .actor-subtract {
     opacity: 0.8;
 }
-#CS5eContainers .difficulty-rating {
+#CSContainers .difficulty-rating {
     width: 70%;
     margin: 0 auto;
     text-align: center;
 }
-#CS5eContainers .difficulty-threshold {
+#CSContainers .difficulty-threshold {
     width: 50%;
     margin: 0 auto;
     text-align: center;
 }
-#CS5eContainers .daily-budget {
+#CSContainers .daily-budget {
     width: 80%;
     margin: 0 auto;
     text-align: center;
     padding-top: 10%;
 }
 
-#CS5eXP {
+#CSXP {
     position: relative;
     display: flex;
     height: auto;
     width: 100%;
 }
-#CS5eXP .scores {
+#CSXP .scores {
     width: 50%;
     margin: 0 auto;
     text-align: center;
 }
-#CS5eXP .clear{
+#CSXP .clear{
     position: absolute;
     margin-top: 5%;
     width: 15%;

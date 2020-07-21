@@ -32,12 +32,12 @@ class CombatSimulator {
       if (tokenButton && game.user.isGM) {
           tokenButton.tools.push({
               name: "simulate",
-              title: "Simulate current encounter",
+              title: game.i18n.localize("CS5e.BUTTON.Title"),
               icon: "fas fa-bolt",
               toggle: false,
               active: true,
               visible: game.user.isGM,
-              onClick: (value) => CombatSimulator.openForm()
+              onClick: () => CombatSimulator.openForm()
           });
       }
   }

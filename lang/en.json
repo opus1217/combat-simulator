@@ -2,6 +2,9 @@
   "CS5e.Title": "Combat Simulator for 5e",
   "CS5e.Description": "No more TPKs or Walkovers - tune your encounters to be challenging and exciting!",
   "CS5e.id": "combat-simulator",
+  "CS5e.TOKEN.Friendly": "Friendly",
+  "CS5e.TOKEN.Hostile": "Hostile",
   "CS5e.Submit": "Fight!",
+  "CS5e.BUTTON.Title": "Simulate the current encounter",
   "CS5e.ERROR.CreateEncounterFirst": "Please create an encounter before using Combat Simulator"
 }
