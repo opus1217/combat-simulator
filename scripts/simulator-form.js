@@ -6,46 +6,50 @@ class CombatSimulatorApplication extends Application {
         super(options);
         if (!game.user.isGM) return;
 
-        this.currentCombat = Combat
-        if (this.currentCombat) {
-          console.log(this.currentCombat);
-          this.combatants = this.currentCombat.data.combatants;
+        this.currentCombat = null;
+        this.allyRating = {
+            "easy": 0,
+            "medium": 0,
+            "hard": 0,
+            "deadly": 0
+        };
+        this.totalXP = 0;
+        this.perAllyXP = 0;
+        this.dailyXP = 0;
+        this.combatDifficulty = "trivial";
 
-          this.friendly = [];
-          this.hostile = [];
+        game.users.apps.push(this)
 
-          this.combatants.forEach(combatant => {
-            if (combatant.token.disposition === FRIENDLY) {
-              this.friendly.push(combatant);
-            } else if (combatant.token.disposition === HOSTILE) {
-              this.hostile.push(combatant);
-            }
-          })
+    }
 
-          console.log(game.i18n.localize("CS5e.TOKEN.Friendly"));
-          this.friendly.forEach((pc, i) => {
-              console.log(pc.name);
-          });
-          console.log(game.i18n.localize("CS5e.TOKEN.Hostile"));
-          this.hostile.forEach((npc, i) => {
-              console.log(npc.name);
-          });
+    setActiveCombat(activeCombat) {
+      this.currentCombat = activeCombat;
 
-          this.allyRating = {
-              "easy": 0,
-              "medium": 0,
-              "hard": 0,
-              "deadly": 0
-          };
-          this.totalXP = 0;
-          this.perAllyXP = 0;
-          this.dailyXP = 0;
-          this.combatDifficulty = "trivial";
+      if (this.currentCombat) {
+        console.log(this.currentCombat);
+        this.combatants = this.currentCombat.data.combatants;
 
-          game.users.apps.push(this)
-        } else {
-          ui.notifications.warn(game.i18n.localize("CS5e.ERROR.CreateEncounterFirst"));
+        this.friendly = this.combatants.filter(combatant => (combatant.token.disposition === FRIENDLY));
+        this.hostile = this.combatants.filter(combatant => (combatant.token.disposition === HOSTILE));
+
+        //Must have at least one Hostile and one Friendly for a fight!
+        if (!this.friendly.length || !this.hostile.length) {
+          ui.notifications.warn(game.i18n.localize("CS5e.ERROR.NeedBothSides"));
+          return;
         }
+
+        console.log(game.i18n.localize("CS5e.TOKEN.Friendly"));
+        this.friendly.forEach((pc, i) => {
+            console.log(pc.name);
+        });
+        console.log(game.i18n.localize("CS5e.TOKEN.Hostile"));
+        this.hostile.forEach((npc, i) => {
+            console.log(npc.name);
+        });
+      } else {
+        ui.notifications.warn(game.i18n.localize("CS5e.ERROR.CreateEncounterFirst"));
+      }
+
     }
 
     static get defaultOptions() {
@@ -60,6 +64,7 @@ class CombatSimulatorApplication extends Application {
         options.classes = ["simulator-form", "simulator"];
         return options;
     }
+
 
     async getData() {
         return {

@@ -6,5 +6,14 @@
   "CS5e.TOKEN.Hostile": "Hostile",
   "CS5e.Submit": "Fight!",
   "CS5e.BUTTON.Title": "Simulate the current encounter",
-  "CS5e.ERROR.CreateEncounterFirst": "Please create an encounter before using Combat Simulator"
+  "CS5e.SETTING.Simulate.Name": "Begin Combat simulates encounter",
+  "CS5e.SETTING.Simulate.Hint": "In the Combat Tracker, the Begin Combat button will simulate the combat instead of running it with your Players",
+  "CS5e.SETTING.NumberOfSimulations.Name": "Number of simulations",
+  "CS5e.SETTING.NumberOfSimulations.Hint": "How many encounter simulations to run (default is 100); for each simulation combat continues until either the Party or the Opponents are all defeated",
+  "CS5e.SETTING.ShowCombatDetail.Name": "Show combat detail",
+  "CS5e.SETTING.ShowCombatDetail.Hint": "In detail mode, shows every attack, spell, saving throw, etc. for each actor. Not suggested for more than 10 simulations.",
+  "CS5e.SETTING.ShowCombatDetail.Summary": "Summary",
+  "CS5e.SETTING.ShowCombatDetail.Detail": "Detail",
+  "CS5e.ERROR.CreateEncounterFirst": "Please create an encounter before using Combat Simulator",
+  "CS5e.ERROR.NeedBothSides": "Make at least one Token Hostile and one Friendly for a valid simulation"
 }
