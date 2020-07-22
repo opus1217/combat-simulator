@@ -1,5 +1,9 @@
 # Changelog
 
+#0.0.5 (2020-07-21 )
+- Toggle the Simulate Combat option from the Combat Tracker as well
+- If you change the global setting, change the Begin Combat behavior
+
 ## 0.0.4 (2020-07-21)
 - Read the current Combat when the Begin Combat button is pressed, (previously was when the Simulator form was created) and pop up the Simulation form
 
