@@ -67,15 +67,19 @@ class CombatSimulatorApplication extends Application {
 
 
     async getData() {
-        return {
-            friendly: this.friendly,
-            hostile: this.hostile,
-            ratings: this.allyRating,
-            allyxp: this.perAllyXP,
-            totalxp: this.totalXP,
-            dailyxp: this.dailyXP,
-            difficulty: this.combatDifficulty
-        };
+      let showCombatDetail = game.settings.get("combat-simulator","showCombatDetail");
+      let numberOfSimulations = game.settings.get("combat-simulator","numberOfSimulations");
+      return {
+          friendly: this.friendly,
+          hostile: this.hostile,
+          ratings: this.allyRating,
+          allyxp: this.perAllyXP,
+          totalxp: this.totalXP,
+          dailyxp: this.dailyXP,
+          difficulty: this.combatDifficulty,
+          showCombatDetail: showCombatDetail,
+          numberOfSimulations: numberOfSimulations
+      };
     }
 
     activateListeners(html) {

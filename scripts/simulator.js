@@ -15,7 +15,7 @@ class CombatSimulator {
       scope: "world",
       config: true,
       default: false,
-      onChange: value => {toggleBeginCombat(game.combat)},
+      onChange: value => {replaceBeginCombat(game.combat)},
       type: Boolean
     });
     game.settings.register(MODULE_NAME, "numberOfSimulations", {
@@ -56,7 +56,6 @@ class CombatSimulator {
       }
   }
   static setup() {
-
   }
 
   static getActorsInEncounter() {
@@ -72,30 +71,32 @@ class CombatSimulator {
   }
 }
 
+// Check the simulation settings every time; if not set then do the normal Begin Combat
 function simulateCombat() {
-      CombatSimulator.openForm();
+  let shouldSimulateCombat = game.settings.get("combat-simulator","combatTrackerSimulate");
+
+  if (shouldSimulateCombat) {
+    CombatSimulator.openForm();
+  } else {
+    // do the normal combat
+    combat.originalStartCombat
+  }
+
 }
 
-/* Check what the Begin Combat button should be set to do
- * Allows us to change after setting/resetting the simulate simulateCombatCheckbox
+/* Substitute for the Begin Combat button if user is GM
+  - then check each time whether to do standard Begin Combat or simulateCombat
+  (have to do it this way because you could change the setting from the config)
+  - if there were a hook on Begin Combat itself that would be simpler because this solution leaves us intercepting the Begin Combat button
+  - doesn't solve the problem if you don't have a combat set up at all
 */
-function toggleBeginCombat(combat) {
+function replaceBeginCombat(combat) {
     if (!combat || !game.user.isGM) return;
 
     if (!combat.originalStartCombat) {
       combat.originalStartCombat = combat.startCombat;
     }
-
-    let shouldSimulateCombat = game.settings.get("combat-simulator","combatTrackerSimulate");
-
-    if (shouldSimulateCombat) {
-      combat.startCombat = simulateCombat;
-    } else {
-      // Reset the Begin Combat button
-      if (combat.originalStartCombat) {
-        combat.startCombat = combat.originalStartCombat;
-      }
-    }
+    combat.startCombat = simulateCombat;
 }
 
 Hooks.on("init", CombatSimulator.init);
@@ -105,7 +106,7 @@ Hooks.on('setup', CombatSimulator.setup);
  * Override the startCombat method ("Begin Combat") from combat tracker.
  * TODO: Would like to override the button title or add another button but don't know how to do that
  */
-Hooks.on('renderCombatTracker', toggleBeginCombat);
+Hooks.on('renderCombatTracker', replaceBeginCombat);
 
 /**
  * Add the "Simulate Combat" as an option in the Combat Tracker settings
