@@ -56,6 +56,9 @@ class CombatSimulator {
       }
   }
   static setup() {
+
+    // FIXME: Need to find a hook for replacing the Begin Combat button even if it has already been rendered
+    //(maybe not a problem for a fresh install?)
   }
 
   static getActorsInEncounter() {
@@ -90,13 +93,19 @@ function simulateCombat() {
   - if there were a hook on Begin Combat itself that would be simpler because this solution leaves us intercepting the Begin Combat button
   - doesn't solve the problem if you don't have a combat set up at all
 */
-function replaceBeginCombat(combat) {
+function replaceBeginCombat(combat, html) {
     if (!combat || !game.user.isGM) return;
+
+    //Try replacing/adding to the Begin Combat call in the Combat tracker
+    if (html) {
+           html.find("a[title='Begin Combat']").attr("title","Simulate Combat").text("Simulate Combat");
+    }
 
     if (!combat.originalStartCombat) {
       combat.originalStartCombat = combat.startCombat;
     }
     combat.startCombat = simulateCombat;
+
 }
 
 Hooks.on("init", CombatSimulator.init);
@@ -124,7 +133,7 @@ Hooks.on('renderCombatTracker', replaceBeginCombat);
      'modules/combat-simulator/templates/combat-config.html',
      data
    );
-
+   //JQuery: Set the height to auto to accomodate the new option and then add the simulateCombatCheckbox before the Submit button
    html.css({height: 'auto'}).find('button[name=submit]').before(simulateCombatCheckbox);
  });
 

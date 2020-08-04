@@ -4,33 +4,16 @@
             <legend class='group-legend'>Friendly</legend>
             <div class="group-field ally-field">
                 {{#each friendly}}
-                    <label>{{this.name}}</label>
+                    <label>{{this.name}}<br></label>
                 {{/each}}
             </div>
         </fieldset>
-
-        <div class="center-container">
-            <div class="difficulty-rating">
-                <h1>Difficulty</h1>
-            </div>
-            <div class="difficulty-threshold">
-                {{#with ratings}}
-                    <label>Easy: {{easy}} XP</label>
-                    <label>Medium: {{medium}} XP</label>
-                    <label>Hard: {{hard}} XP</label>
-                    <label>Deadly: {{deadly}} XP</label>
-                {{/with}}
-            </div>
-            <div class="daily-budget">
-                <label>Daily Budget: {{dailyxp}} XP</label>
-            </div>
-        </div>
 
         <fieldset class="group-container opponent-container">
             <legend class='group-legend'>Hostile</legend>
             <div class="group-field opponent-field">
                 {{#each hostile}}
-                    <label>{{this.name}}</label>
+                    <label>{{this.name}}<br></label>
                 {{/each}}
             </div>
         </fieldset>
@@ -69,18 +52,13 @@
       </p>
     </div>
 
-    <div id="CSXP">
-        <div class='scores'>
-            <h2>
-                Total XP: {{this.totalxp}}
-            </h2>
-
-            <h3>
-                XP / player: {{this.allyxp}}
-            </h3>
+    <div class="center-container">
+        <div class="difficulty-rating">
+            Predicted difficulty per DMG: <b>{{difficulty}}</b>
         </div>
         <button class='clear' type='button'>
             Fight!
         </button>
     </div>
+
 </form>

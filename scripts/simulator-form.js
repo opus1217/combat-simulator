@@ -8,15 +8,15 @@ class CombatSimulatorApplication extends Application {
 
         this.currentCombat = null;
         this.allyRating = {
-            "easy": 0,
-            "medium": 0,
-            "hard": 0,
-            "deadly": 0
+            "Easy": 0,
+            "Medium": 0,
+            "Hard": 0,
+            "Deadly": 0
         };
         this.totalXP = 0;
         this.perAllyXP = 0;
         this.dailyXP = 0;
-        this.combatDifficulty = "trivial";
+        this.combatDifficulty = "Trivial";
 
         game.users.apps.push(this)
 
