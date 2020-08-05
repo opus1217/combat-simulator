@@ -47,6 +47,7 @@ class CombatSimulator {
     });
   }
 
+/*
   static getSceneControlButtons(buttons) {
       let tokenButton = buttons.find(b => b.name == "token")
 
@@ -62,20 +63,13 @@ class CombatSimulator {
           });
       }
   }
+  */
   static setup() {
 
-    // FIXME: Need to find a hook for replacing the Begin Combat button even if it has already been rendered
-    //(maybe not a problem for a fresh install?)
   }
 
   static getActorsInEncounter() {
 
-  }
-
-  static simulateCombat() {
-    let shouldSimulateCombat = game.settings.get("combat-simulator","combatTrackerSimulate");
-
-    openForm();
   }
 
 }
@@ -88,44 +82,14 @@ async function openForm() {
     this.CSAForm.render(true);
 }
 
-/* Substitute for the Begin Combat button if user is GM
-  - then check each time whether to do standard Begin Combat or simulateCombat
-  (have to do it this way because you could change the setting from the config)
-  - if there were a hook on Begin Combat itself that would be simpler because this solution leaves us intercepting the Begin Combat button
-  - doesn't solve the problem if you don't have a combat set up at all
-*/
-function replaceBeginCombat(combat, html) {
-    if (!combat || !game.user.isGM) return;
-    let shouldSimulateCombat = game.settings.get("combat-simulator","combatTrackerSimulate");
-    let beginCombatButtonTitle = game.i18n.localize("COMBAT.Begin");
-    let simulateCombatButtonTitle = game.i18n.localize("CS5e.Simulate");
-    //Replace the button and also the call in the Combat tracker
-    if (shouldSimulateCombat) {
-      if (!combat.originalStartCombat) {
-        combat.originalStartCombat =  combat.rollNPC;  //combat.startCombat;
-      }
-      combat.rollNPC = openForm.bind(combat);
-      //combat.startCombat = openForm.bind(combat);
-      if (html) {
-        html.find("a[title='" + beginCombatButtonTitle + "']").attr("title",simulateCombatButtonTitle).text(simulateCombatButtonTitle);
-      }
-    } else {
-      if (combat.originalStartCombat) {
-        combat.startCombat = combat.originalStartCombat;
-      }
-      if (html) {
-        html.find("a[title='" + simulateCombatButtonTitle + "']").attr("title",beginCombatButtonTitle).text(beginCombatButtonTitle);
-      }
-    }
-}
+
+
 
 Hooks.on("init", CombatSimulator.init);
 Hooks.on('setup', CombatSimulator.setup);
 
-/**
- * Override the startCombat method ("Begin Combat") from combat tracker.
- * TODO: Would like to override the button title or add another button but don't know how to do that
- */
+/* Change the Begin Combat button -> Simulate if you are GM and the Simulate Combat option is set
+*/
 Hooks.on('renderCombatTracker', ({combat}, html) => {
   if (!combat || !game.user.isGM) return;
   let shouldSimulateCombat = game.settings.get("combat-simulator","combatTrackerSimulate");
