@@ -5,6 +5,7 @@
   "CS5e.TOKEN.Friendly": "Friendly",
   "CS5e.TOKEN.Hostile": "Hostile",
   "CS5e.Submit": "Fight!",
+  "CS5e.Simulate": "Simulate",
   "CS5e.BUTTON.Title": "Simulate the current encounter",
   "CS5e.SETTING.Simulate.Name": "Begin Combat simulates encounter",
   "CS5e.SETTING.Simulate.Hint": "In the Combat Tracker, the Begin Combat button will simulate the combat instead of running it with your Players",
