@@ -1,39 +1,49 @@
 #CSContainers {
     display: flex;
-    height: auto;
     width: 100%;
-    min-height: 200px;
 }
-#CSContainers .group-container {
+.group-container {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
     width: 50%;
 }
-#CSContainers .group-legend {
+.group-legend {
     width: auto;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
-#CSContainers .center-container {
+
+.actor-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.center-container {
     width: 50%;
 }
-#CSContainers .group-field {
+
+.results-scrolling {
+    max-height: 300px;
+     overflow: auto;
+}
+
+.group-field {
     display: flex;
     flex-wrap: wrap;
     position: relative;
 }
-#CSContainers .actor-container {
+.actor-container {
     opacity: 1;
     position: relative;
     margin: 0 auto;
 }
-#CSContainers .actor-portrait {
+.actor-portrait {
     width: 50px;
     height: 50px;
 }
-#CSContainers .actor-subtract {
+.actor-subtract {
     opacity: 0;
     position: absolute;
     top: 50%;
@@ -41,23 +51,22 @@
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
 }
-#CSContainers .actor-container:hover .actor-portrait {
+.actor-container:hover .actor-portrait {
     opacity: 0.3;
 }
-#CSContainers .actor-container:hover .actor-subtract {
+.actor-container:hover .actor-subtract {
     opacity: 0.8;
 }
-#CSContainers .difficulty-rating {
-    width: 70%;
+.difficulty-rating {
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
 }
-#CSContainers .difficulty-threshold {
+.difficulty-threshold {
     width: 50%;
     margin: 0 auto;
     text-align: center;
 }
-#CSContainers .daily-budget {
+.daily-budget {
     width: 80%;
     margin: 0 auto;
     text-align: center;

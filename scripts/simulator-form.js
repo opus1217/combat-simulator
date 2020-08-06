@@ -22,6 +22,29 @@ class CombatSimulatorApplication extends Application {
 
     }
 
+    /** @inheritdoc */
+    //Buttons on the right side of the form header - add an ability to change config from here
+    _getHeaderButtons() {
+      let buttons = super._getHeaderButtons();
+
+      // Token Configuration
+      const canConfigure = game.user.isGM;
+      if (canConfigure) {
+        buttons = [
+          {
+            label: "Settings",
+            class: "configure-sheet",
+            icon: "fas fa-cog",
+            onclick: ev =>  {
+              ev.preventDefault();
+              new CombatSimulatorSettings().render(true);
+            }
+          }
+        ].concat(buttons);
+      }
+      return buttons
+    }
+
     setActiveCombat(activeCombat) {
       this.currentCombat = activeCombat;
 
@@ -382,4 +405,40 @@ class CombatSimulatorApplication extends Application {
         app.render();
     }
 
+}
+
+class CombatSimulatorSettings extends FormApplication {
+  /** @override */
+	static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      title: game.i18n.localize("CS5e.Title"),
+      id: "combat-simulator-settings",
+      template: "modules/combat-simulator/templates/CS5e-settings.html",
+      width: 600,
+      height: "auto",
+      submitOnChange: false,
+      submitOnClose: true
+    })
+  }
+
+  getData(options) {
+    const gs = game.settings;
+    const data = {
+      combatTrackerSimulate: gs.get(MODULE_NAME,"combatTrackerSimulate"),
+      numberOfSimulations: gs.get(MODULE_NAME,"numberOfSimulations"),
+      showCombatDetail: gs.get(MODULE_NAME,"showCombatDetail")
+    };
+
+    return data;
+  }
+
+  async _updateObject(event, formData) {
+    for ( let [k, v] of Object.entries(formData) ) {
+      //let s = game.settings.settings.get(k);
+      let current = game.settings.get(MODULE_NAME, k);
+      if ( v !== current ) {
+        await game.settings.set(MODULE_NAME, k, v);
+      }
+    }
+  }
 }

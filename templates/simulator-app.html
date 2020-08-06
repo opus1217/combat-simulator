@@ -3,62 +3,69 @@
         <fieldset class="group-container ally-container">
             <legend class='group-legend'>Friendly</legend>
             <div class="group-field ally-field">
+              <ul class="actor-list">
                 {{#each friendly}}
-                    <label>{{this.name}}<br></label>
+                    <li>{{this.name}}</li>
                 {{/each}}
+                </ul>
             </div>
         </fieldset>
 
         <fieldset class="group-container opponent-container">
             <legend class='group-legend'>Hostile</legend>
             <div class="group-field opponent-field">
+              <ul class="actor-list">
                 {{#each hostile}}
-                    <label>{{this.name}}<br></label>
+                    <li>{{this.name}}</li>
                 {{/each}}
+              </ul>
             </div>
         </fieldset>
     </div>
 
-    <div class="form-group">
-      <label for="numberOfSimulations">
-        {{localize 'CS5e.SETTING.NumberOfSimulations.Name'}}
-      </label>
-      <input
-        type="number"
-        name="numberOfSimulations"
-        id="numberOfSimulations"
-        value="{{numberOfSimulations}}"
-        maxlength="10"
-        data-dtype="Number"
-      />
-      <p class="notes">
-        {{localize 'CS5e.SETTING.NumberOfSimulations.Hint'}}
-      </p>
-    </div>
-    <div class="form-group">
-      <label for="showCombatDetail">
-        {{localize 'CS5e.SETTING.ShowCombatDetail.Name'}}
-      </label>
-      <input
-        type="text"
-        name="showCombatDetail"
-        id="showCombatDetail"
-        value="{{showCombatDetail}}"
-        maxlength="20"
-        data-dtype="String"
-      />
-      <p class="notes">
-        {{localize 'CS5e.SETTING.ShowCombatDetail.Hint'}}
-      </p>
-    </div>
 
-    <div class="center-container">
+    <div>
         <div class="difficulty-rating">
             Predicted difficulty per DMG: <b>{{difficulty}}</b>
         </div>
         <button class='clear' type='button'>
             Fight!
         </button>
-    </div>
+        <hr width="70%"/>
+        <div class="results-scrolling">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
 
+          <p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+
+          <p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+          <p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+
+          <p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+        </div>
+    </div>
 </form>

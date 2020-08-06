@@ -85,6 +85,7 @@ async function openForm() {
 
 
 
+
 Hooks.on("init", CombatSimulator.init);
 Hooks.on('setup', CombatSimulator.setup);
 

@@ -1,0 +1,33 @@
+<form>
+  <div class="form-group">
+    <label for="combatTrackerSimulate">
+      {{localize 'CS5e.SETTING.Simulate.Name'}}
+    </label>
+    <input type="checkbox" name="combatTrackerSimulate" id="combatTrackerSimulate" {{checked combatTrackerSimulate}} data-dtype="Boolean"/>
+    <p class="notes">
+      {{localize 'CS5e.SETTING.Simulate.Hint'}}
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label for="numberOfSimulations">{{localize 'CS5e.SETTING.NumberOfSimulations.Name'}}</label>
+    <div class="form-fields">
+      <input type="range" name="numberOfSimulations" value="{{numberOfSimulations}}" min="1" max="1000" step="100" data-dtype="Number">
+      <span class="range-value">{{numberOfSimulations}}</span>
+    </div>
+    <p class="notes">
+      {{localize 'CS5e.SETTING.NumberOfSimulations.Hint'}}
+    </p>
+  </div>
+
+  <div class="form-group">
+    <label for="showCombatDetail">{{localize 'CS5e.SETTING.ShowCombatDetail.Name'}}</label>
+    <div class="form-fields">
+        <select name="showCombatDetail">
+            <option value="Summary" selected="">{{localize 'CS5e.SETTING.ShowCombatDetail.Summary'}}</option>
+            <option value="Detail" selected="">{{localize 'CS5e.SETTING.ShowCombatDetail.Detail'}}</option>
+        </select>
+    </div>
+    <p class="notes">{{localize 'CS5e.SETTING.ShowCombatDetail.Hint'}}</p>
+  </div>
+</form>
