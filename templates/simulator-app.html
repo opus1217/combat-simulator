@@ -1,7 +1,7 @@
-<form>
+<form onsubmit="event.preventDefault()">
     <div id="CSContainers">
         <fieldset class="group-container ally-container">
-            <legend class='group-legend'>Friendly</legend>
+            <legend class='group-legend'>{{localize "CS5e.TOKEN.Friendly"}}</legend>
             <div class="group-field ally-field">
               <ul class="actor-list">
                 {{#each friendly}}
@@ -12,7 +12,7 @@
         </fieldset>
 
         <fieldset class="group-container opponent-container">
-            <legend class='group-legend'>Hostile</legend>
+            <legend class='group-legend'>{{localize "CS5e.TOKEN.Hostile"}}</legend>
             <div class="group-field opponent-field">
               <ul class="actor-list">
                 {{#each hostile}}
@@ -26,46 +26,21 @@
 
     <div>
         <div class="difficulty-rating">
-            Predicted difficulty per DMG: <b>{{difficulty}}</b>
+          <br>
+            {{localize "CS5e.INFO.DMGDifficulty"}} <b>{{difficultyFromDMG}}</b><br>
+            {{localize "CS5e.INFO.SimulationDifficulty"}} <b>{{difficultyFromSimulation}}</b><br>
         </div>
-        <button class='clear' type='button'>
-            Fight!
-        </button>
+        <div>
+          <p> {{localize "CS5e.INFO.Rerun"}}</p>
+
+        </div>
         <hr width="70%"/>
         <div class="results-scrolling">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-
-          <p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-
-          <p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-          <p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-
-          <p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-          Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-          Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-          Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-          Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+          {{simulationResults}}
+        </div>
+        <hr width="70%"/>
+        <div>
+          {{localize "CS5e.INFO.MoreAboutDMG"}}
         </div>
     </div>
 </form>

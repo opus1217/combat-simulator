@@ -1,5 +1,39 @@
 const FRIENDLY = 1;
-const HOSTILE = -1
+const HOSTILE = -1;
+const fillText = `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+
+<p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+
+<p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+<p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+
+<p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
+Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
+Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
+Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
+Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
+`;
 
 class CombatSimulatorApplication extends Application {
     constructor(Combat, options = {}) {
@@ -22,12 +56,29 @@ class CombatSimulatorApplication extends Application {
 
     }
 
+    //Options that determine how Foundry lays out the popout window
+    static get defaultOptions() {
+//FIXME: Not clear that .classes or .id is being used (array of css classes to apply)
+        const options = super.defaultOptions;
+        options.title = game.i18n.localize("CS5e.Title");
+        options.id = game.i18n.localize("CS5e.id"); //id=combat-simulator
+        options.template = "modules/combat-simulator/templates/simulator-app.html";
+        options.classes = ["simulator-form", "simulator"];
+        options.closeOnSubmit = false;
+        options.popOut = true;
+        options.width = 510;
+        options.height = "auto";
+        options.resizable = true;
+        return options;
+    }
+
+
     /** @inheritdoc */
-    //Buttons on the right side of the form header - add an ability to change config from here
+    //Add Buttons on the right side of the window  header - add an ability to change config from here
     _getHeaderButtons() {
       let buttons = super._getHeaderButtons();
 
-      // Token Configuration
+      // Settings
       const canConfigure = game.user.isGM;
       if (canConfigure) {
         buttons = [
@@ -45,6 +96,8 @@ class CombatSimulatorApplication extends Application {
       return buttons
     }
 
+    //Called prior to rendering
+    //Split combatants for the viewed Combat into friendly and hostile based on Token Disposition
     setActiveCombat(activeCombat) {
       this.currentCombat = activeCombat;
 
@@ -52,81 +105,72 @@ class CombatSimulatorApplication extends Application {
         console.log(this.currentCombat);
         this.combatants = this.currentCombat.data.combatants;
 
-        this.friendly = this.combatants.filter(combatant => (combatant.token.disposition === FRIENDLY));
-        this.hostile = this.combatants.filter(combatant => (combatant.token.disposition === HOSTILE));
+        this.friendlies = this.combatants.filter(combatant => (combatant.token.disposition === FRIENDLY));
+        this.hostiles = this.combatants.filter(combatant => (combatant.token.disposition === HOSTILE));
 
         //Must have at least one Hostile and one Friendly for a fight!
-        if (!this.friendly.length || !this.hostile.length) {
+        if (!this.friendlies.length || !this.hostiles.length) {
           ui.notifications.warn(game.i18n.localize("CS5e.ERROR.NeedBothSides"));
           return;
         }
 
         console.log(game.i18n.localize("CS5e.TOKEN.Friendly"));
-        this.friendly.forEach((pc, i) => {
+        this.friendlies.forEach((pc, i) => {
             console.log(pc.name);
         });
         console.log(game.i18n.localize("CS5e.TOKEN.Hostile"));
-        this.hostile.forEach((npc, i) => {
+        this.hostiles.forEach((npc, i) => {
             console.log(npc.name);
         });
+
+        this.calcXPThresholds();
+        this.calcRating();
+
       } else {
         ui.notifications.warn(game.i18n.localize("CS5e.ERROR.CreateEncounterFirst"));
       }
 
     }
 
-    static get defaultOptions() {
-        const options = super.defaultOptions;
-        options.title = game.i18n.localize("CS5e.Title");
-        options.id = game.i18n.localize("CS5e.id");
-        options.template = "modules/combat-simulator/templates/simulator-app.html";
-        options.closeOnSubmit = true;
-        options.popOut = true;
-        options.width = 510;
-        options.height = "auto";
-        options.classes = ["simulator-form", "simulator"];
-        return options;
-    }
 
 
     async getData() {
       let showCombatDetail = game.settings.get("combat-simulator","showCombatDetail");
       let numberOfSimulations = game.settings.get("combat-simulator","numberOfSimulations");
       return {
-          friendly: this.friendly,
-          hostile: this.hostile,
+          friendly: this.friendlies,
+          hostile: this.hostiles,
           ratings: this.allyRating,
           allyxp: this.perAllyXP,
           totalxp: this.totalXP,
           dailyxp: this.dailyXP,
-          difficulty: this.combatDifficulty,
-          showCombatDetail: showCombatDetail,
-          numberOfSimulations: numberOfSimulations
+          difficultyFromDMG: this.combatDifficulty,
+          difficultyFromSimulation: this.combatDifficulty,
+          simulationResults: fillText
       };
     }
 
     activateListeners(html) {
         super.activateListeners(html);
-
     }
 
     /**
      * Calculates XP thresholds for the PC characters, as well as the thresholds for monster/NPC combatants.
-     *
+     *  From EncounterBuilderApplication, modified to use Friendlies and Hostiles (based on Token Disposition)
      * @memberof EncounterBuilderApplication
      */
     calcXPThresholds() {
         let allyRating = {
-            "easy": 0,
-            "medium": 0,
-            "hard": 0,
-            "deadly": 0
+            "Easy": 0,
+            "Medium": 0,
+            "Hard": 0,
+            "Deadly": 0
         };
         let totalXP = 0;
         let dailyXP = 0;
 
-        this.allies.forEach(function (ally, index) {
-
+        this.friendlies.forEach(function (combatant, index) {
+            let ally = combatant.actor;
             let level;
             if (ally.data.type === "character") {
                 level = parseInt(ally.data.data.details.level);
@@ -142,13 +186,14 @@ class CombatSimulatorApplication extends Application {
                 }
                 level += 1
             }
-            allyRating["easy"] += EB.xpThresholds.easy[level - 1];
-            allyRating["medium"] += EB.xpThresholds.medium[level - 1];
-            allyRating["hard"] += EB.xpThresholds.hard[level - 1];
-            allyRating["deadly"] += EB.xpThresholds.deadly[level - 1];
+            allyRating["Easy"] += EB.xpThresholds.easy[level - 1];
+            allyRating["Medium"] += EB.xpThresholds.medium[level - 1];
+            allyRating["Hard"] += EB.xpThresholds.hard[level - 1];
+            allyRating["Deadly"] += EB.xpThresholds.deadly[level - 1];
             dailyXP += EB.dailyXPBudget[level - 1];
         });
-        this.opponents.forEach(function (opponent, index) {
+        this.hostiles.forEach(function (combatant, index) {
+            let opponent = combatant.actor;
             let xp;
             if (opponent.data.type === "character") {
                 let level = opponent.data.data.details.level
@@ -164,14 +209,14 @@ class CombatSimulatorApplication extends Application {
         });
 
         let multiplier = 0;
-        const numOpponents = this.opponents.length;
-        const numAllies = this.allies.length
+        const numOpponents = this.hostiles.length;
+        const numAllies = this.friendlies.length
         if (numAllies < 3) {
             if (numOpponents > 15) {
                 multiplier = 5.0;
             }
             else if (numOpponents > 0) {
-                multiplier = EB.encounterMultipliers[this.opponents.length + 1];
+                multiplier = EB.encounterMultipliers[numOpponents + 1];
             }
         }
         else if (numAllies > 5) {
@@ -179,7 +224,7 @@ class CombatSimulatorApplication extends Application {
                 multiplier = 4.0;
             }
             else if (numOpponents > 0) {
-                multiplier = EB.encounterMultipliers[this.opponents.length - 1];
+                multiplier = EB.encounterMultipliers[numOpponents - 1];
             }
         }
         else {
@@ -187,7 +232,7 @@ class CombatSimulatorApplication extends Application {
                 multiplier = 4.0;
             }
             else if (numOpponents > 0) {
-                multiplier = EB.encounterMultipliers[this.opponents.length];
+                multiplier = EB.encounterMultipliers[numOpponents];
             }
         }
 
@@ -195,7 +240,7 @@ class CombatSimulatorApplication extends Application {
         this.totalXP = multiplier * totalXP;
         this.dailyXP = dailyXP;
 
-        let perAllyXP = Math.floor(this.totalXP / this.allies.length)
+        let perAllyXP = Math.floor(this.totalXP / numAllies)
 
         if (isFinite(perAllyXP)) {
             this.perAllyXP = perAllyXP;
@@ -213,7 +258,7 @@ class CombatSimulatorApplication extends Application {
     calcRating() {
         let allyRating = this.allyRating;
         let totalXP = this.totalXP;
-        let combatDifficulty = "trivial";
+        let combatDifficulty = "Trivial";
 
         Object.keys(allyRating).forEach(function (key) {
             let threshold = allyRating[key]
