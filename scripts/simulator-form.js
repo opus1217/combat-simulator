@@ -1,3 +1,4 @@
+"use strict";
 const FRIENDLY = 1;
 const HOSTILE = -1;
 const fillText = `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -52,6 +53,7 @@ class CombatSimulatorApplication extends Application {
         this.dailyXP = 0;
         this.combatDifficulty = "Trivial";
 
+        this.simulationResults = "";
         game.users.apps.push(this)
 
     }
@@ -104,6 +106,7 @@ class CombatSimulatorApplication extends Application {
       if (this.currentCombat) {
         console.log(this.currentCombat);
         this.combatants = this.currentCombat.data.combatants;
+  // FIXME: Recover if there are tokens with not actor or disposition info (not sure how it happens but it has)
 
         this.friendlies = this.combatants.filter(combatant => (combatant.token.disposition === FRIENDLY));
         this.hostiles = this.combatants.filter(combatant => (combatant.token.disposition === HOSTILE));
@@ -132,11 +135,17 @@ class CombatSimulatorApplication extends Application {
 
     }
 
-
+    simulate(numberOfSimulations, showCombatDetail) {
+      var simulation = new Simulation(numberOfSimulations, showCombatDetail, this.friendlies, this.hostiles, "Friendlies", "Hostiles");
+      var summaryOutput = "";
+      var detailOutput = "";
+      this.simulationResults = simulation.run(summaryOutput, detailOutput);
+    }
 
     async getData() {
       let showCombatDetail = game.settings.get("combat-simulator","showCombatDetail");
       let numberOfSimulations = game.settings.get("combat-simulator","numberOfSimulations");
+      console.log(this.simulationResults);
       return {
           friendly: this.friendlies,
           hostile: this.hostiles,
@@ -146,7 +155,7 @@ class CombatSimulatorApplication extends Application {
           dailyxp: this.dailyXP,
           difficultyFromDMG: this.combatDifficulty,
           difficultyFromSimulation: this.combatDifficulty,
-          simulationResults: fillText
+          simulationResults: this.simulationResults
       };
     }
 
@@ -159,6 +168,7 @@ class CombatSimulatorApplication extends Application {
      *  From EncounterBuilderApplication, modified to use Friendlies and Hostiles (based on Token Disposition)
      * @memberof EncounterBuilderApplication
      */
+  //FIXME: Remove dependency on EB or make it explicit
     calcXPThresholds() {
         let allyRating = {
             "Easy": 0,
@@ -485,5 +495,9 @@ class CombatSimulatorSettings extends FormApplication {
         await game.settings.set(MODULE_NAME, k, v);
       }
     }
+    //FIXME: If you changed the Begin Combat -> Simulate setting, it should reflect in the Combat Tracker immediately
+    //Presumably have to re-render the Combat tracker
+    let combatTracker = ui.combat;
+    if (combatTracker) combatTracker.render();
   }
 }

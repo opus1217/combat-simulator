@@ -78,12 +78,12 @@ async function openForm() {
     if (this.CSAForm === undefined) {
         this.CSAForm = new CombatSimulatorApplication();
     }
-    this.CSAForm.setActiveCombat(game.combat)
+    this.CSAForm.setActiveCombat(game.combat);
+    var numberOfSimulations = game.settings.get(MODULE_NAME,"numberOfSimulations");
+    var showCombatDetail =  game.settings.get(MODULE_NAME,"showCombatDetail");
+    this.CSAForm.simulate(numberOfSimulations, showCombatDetail);
     this.CSAForm.render(true);
 }
-
-
-
 
 
 Hooks.on("init", CombatSimulator.init);
