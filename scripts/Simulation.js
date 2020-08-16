@@ -31,9 +31,11 @@ class Simulation {
     var numTeamHostilesWins = 0;
     var numTies = 0;  //if we go more than MAX_ROUNDS then it will be a tie
 
+    summaryOutput += "<br>Running " + this.numberOfSimulations + " simulations<br>";
+
     for (let iSimulation=0; iSimulation < this.numberOfSimulations; iSimulation++) {
       var simulationSummary = "";
-      var simulationDetail = "";
+      var simulationDetail = "<br><br>#" + iSimulation + ":";
 
       var remainingCombatants = this.friendlies.concat(this.hostiles);
 
@@ -70,10 +72,10 @@ class Simulation {
         }//end for combatants in initiative ordering
         if (deadTeam) break;
       }//end for roundNum
-      summaryOutput += "";
+      summaryOutput += simulationSummary;
       detailOutput += simulationDetail;
     }//end for iSimulation
-    return detailOutput;
+    return {summaryOutput : summaryOutput, detailOutput : detailOutput};
   }//end function run
 
 // FIXME:

@@ -45,6 +45,10 @@ class Combatant {
     this.savingThrowsMade = [];
   }
 
+  get nameAndHP() {
+    return this.name + "(" + this.currentHP + ")";
+  }
+
   static resetAtStartOfSimulation(combatants) {
     for (let combatant of combatants) {
       combatant._resetAtStartOfSimulation();
@@ -52,8 +56,8 @@ class Combatant {
 
     //Reorder by initiative desc, breaking ties by dex
     combatants.sort((c1, c2) => {
-      (c1.initiative > c2.initiative) ? 1 : (c1.initiative === c2.initiative) ? ((c1.dexterity > c2.dexterity) ? 1 : -1) : -1;
-    })
+      return (c1.initiative > c2.initiative) ? -1 : ((c1.initiative === c2.initiative) ? ((c1.dexterity > c2.dexterity) ? -1 : 1) : 1);
+    });
   }
 
   _resetAtStartOfSimulation() {

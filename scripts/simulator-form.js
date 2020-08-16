@@ -1,40 +1,6 @@
 "use strict";
 const FRIENDLY = 1;
 const HOSTILE = -1;
-const fillText = `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-
-<p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-
-<p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-<p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-
-<p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Duis tristique sollicitudin nibh sit amet commodo nulla. Platea dictumst quisque sagittis purus sit.
-Ornare massa eget egestas purus viverra accumsan in. Porta lorem mollis aliquam ut porttitor leo a diam. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit.
-Senectus et netus et malesuada fames ac turpis. Enim eu turpis egestas pretium aenean pharetra magna. Malesuada proin libero nunc consequat interdum varius.
-Odio euismod lacinia at quis risus sed vulputate. Posuere sollicitudin aliquam ultrices sagittis orci a. Massa tempor nec feugiat nisl pretium fusce id velit.
-Ut tristique et egestas quis ipsum suspendisse ultrices gravida. Est lorem ipsum dolor sit amet consectetur adipiscing. Fermentum et sollicitudin ac orci phasellus egestas.</p>
-`;
 
 class CombatSimulatorApplication extends Application {
     constructor(Combat, options = {}) {
@@ -139,7 +105,8 @@ class CombatSimulatorApplication extends Application {
       var simulation = new Simulation(numberOfSimulations, showCombatDetail, this.friendlies, this.hostiles, "Friendlies", "Hostiles");
       var summaryOutput = "";
       var detailOutput = "";
-      this.simulationResults = simulation.run(summaryOutput, detailOutput);
+      let simulationOutput = simulation.run(summaryOutput, detailOutput);
+      this.simulationResults = simulationOutput.summaryOutput + "<br>" + simulationOutput.detailOutput;
     }
 
     async getData() {
