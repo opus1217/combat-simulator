@@ -33,9 +33,9 @@ class Simulation {
 
     summaryOutput += "<br>Running " + this.numberOfSimulations + " simulations<br>";
 
-    for (let iSimulation=0; iSimulation < this.numberOfSimulations; iSimulation++) {
+    for (let iSimulation=1; iSimulation <= this.numberOfSimulations; iSimulation++) {
       var simulationSummary = "";
-      var simulationDetail = "<br><br>#" + iSimulation + ":";
+      var simulationDetail = "<br><br>Simulation #" + iSimulation + ":";
 
       var remainingCombatants = this.friendlies.concat(this.hostiles);
 

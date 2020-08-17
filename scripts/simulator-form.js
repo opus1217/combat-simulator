@@ -105,8 +105,7 @@ class CombatSimulatorApplication extends Application {
       var simulation = new Simulation(numberOfSimulations, showCombatDetail, this.friendlies, this.hostiles, "Friendlies", "Hostiles");
       var summaryOutput = "";
       var detailOutput = "";
-      let simulationOutput = simulation.run(summaryOutput, detailOutput);
-      this.simulationResults = simulationOutput.summaryOutput + "<br>" + simulationOutput.detailOutput;
+      this.simulationResults = simulation.run(summaryOutput, detailOutput);
     }
 
     async getData() {
@@ -122,7 +121,8 @@ class CombatSimulatorApplication extends Application {
           dailyxp: this.dailyXP,
           difficultyFromDMG: this.combatDifficulty,
           difficultyFromSimulation: this.combatDifficulty,
-          simulationResults: this.simulationResults
+          simulationSummary: this.simulationResults.summaryOutput,
+          simulationDetail: this.simulationResults.detailOutput
       };
     }
 
@@ -462,8 +462,8 @@ class CombatSimulatorSettings extends FormApplication {
         await game.settings.set(MODULE_NAME, k, v);
       }
     }
-    //FIXME: If you changed the Begin Combat -> Simulate setting, it should reflect in the Combat Tracker immediately
-    //Presumably have to re-render the Combat tracker
+    //If you changed the Begin Combat -> Simulate setting, it should reflect in the Combat Tracker immediately
+    //so we re-render the Combat tracker
     let combatTracker = ui.combat;
     if (combatTracker) combatTracker.render();
   }

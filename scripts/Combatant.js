@@ -62,9 +62,9 @@ class Combatant {
 
   _resetAtStartOfSimulation() {
     this.initiative = this.rollInitiative();
-    this.startingHP = 50; // FIXME: this.creature.calculateStartingHP(this.hpCalc);
+    this.startingHP = this.creature.calculateStartingHP();
     this.currentHP = this.startingHP;
-    this.currentSpellSlots = [4,3,3,3,3]; // FIXME: this.creature.spellSlots;
+    this.currentSpellSlots = this.creature.spellSlots;
     this.conditions = [];
     this.savingThrowsMade = [];
 

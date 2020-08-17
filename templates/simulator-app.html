@@ -27,16 +27,27 @@
     <div>
         <div class="difficulty-rating">
           <br>
-            {{localize "CS5e.INFO.DMGDifficulty"}} <b>{{difficultyFromDMG}}</b><br>
+            {{localize "CS5e.INFO.DMGDifficulty"}}
+            <div class="tooltip">
+              <i class="fas fa-info-circle"></i>
+                <span class="tooltiptext">{{{localize "CS5e.INFO.MoreAboutDMG"}}}</span>
+            </div>
+            <b>{{difficultyFromDMG}}</b><br>
             {{localize "CS5e.INFO.SimulationDifficulty"}} <b>{{difficultyFromSimulation}}</b><br>
         </div>
+
         <div>
           <p> {{localize "CS5e.INFO.Rerun"}}</p>
-
         </div>
         <hr width="70%"/>
-        <div class="results-scrolling">
-          {{{simulationResults}}}
+        <div>
+          {{{simulationSummary}}}
+        </div>
+        <div id="accordion">
+          <h4>Simulation Details:</h4>
+          <div class="results-detail">
+            {{{simulationDetail}}}
+          </div>
         </div>
         <hr width="70%"/>
         <div>

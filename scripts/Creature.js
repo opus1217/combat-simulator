@@ -4,12 +4,12 @@
 
 //ENUMS
 const Ability = {
-  str : "strength",
-  dex : "dexterity",
-  con : "constitution",
-  int : "intelligence",
-  wis : "wisdom",
-  cha : "charisma"
+  str : "str",
+  dex : "dex",
+  con : "con",
+  int : "int",
+  wis : "wis",
+  cha : "cha"
 }
 
 const SkillName = {
@@ -64,18 +64,52 @@ const Race =  {
 
 
 class Creature {
-    constructor(actor) {
-      this.actor = actor;
+  constructor(actor) {
+    this.actor = actor;
+    if (actor) {
+      let creatureData = actor.data.data;
+
+      //AC and HP
+      this.ac = creatureData.attributes.ac.value;
+      this.hp = {
+        fixed : creatureData.attributes.hp.value
+      };
+
+
+      //ABILITIES and SAVES
+      this.abilities = {};
+      this.saves = {};
+      for (let key in Ability) {
+          this.abilities[key] = creatureData.abilities[key].value;
+          this.saves[key] = creatureData.abilities[key].save;
+      }
+
+      //SKILLS
       this.skills = [];
-      this.skills[SkillName.initiative] = actor.data.data.attributes.init.mod;
+      this.skills[SkillName.initiative] = creatureData.attributes.init.mod;
+
+      //SPELLBOOKS
+
+
+      //SPELL SLOTS
+      this.spellSlots = [];
+      for (let slot=1; slot<=9; slot++) {
+        this.spellSlots.push(creatureData.spells["spell"+slot].value);
+      }
     }
+  }
 
     getSkillBonus(skill) {
       return this.skills[skill];
     }
 
     getAbilityModifier(ability) {
-      return this.actor.data.data.abilities[ability].mod;
+      let value = this.abilities[ability].mod;
+
+    }
+
+    calculateStartingHP() {
+      return this.hp.fixed;
     }
 
 }//end class Creature
