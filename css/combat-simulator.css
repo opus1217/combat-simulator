@@ -27,7 +27,14 @@
 .results-detail {
     max-height: 300px;
      overflow: auto;
+     display: flex;
 }
+
+.results-hidden {
+     display: none;
+}
+
+
 
 .group-field {
     display: flex;

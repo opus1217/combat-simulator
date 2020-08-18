@@ -18,7 +18,7 @@
   "CS5e.ERROR.CreateEncounterFirst": "Please create an encounter before using Combat Simulator",
   "CS5e.ERROR.NeedBothSides": "Make at least one Token Hostile and one Friendly for a valid simulation",
   "CS5e.INFO.DMGDifficulty" : "DMG-predicted difficulty (from DMG pg 82):",
-  "CS5e.INFO.MoreAboutDMG" : "The DMG, Kobold Fight Club, and other Encounter Builders all use variants of the method recommended on page 82 of the DMG which uses XP thresholds and various adjustments based on number of party members and number of opponents. As we all know, one well-placed fireball can completely change the outcome of a supposedly easy or deadly fight. If you want to know how your party will <b>really</b> do, with their actual initiative, skills, feats, and magic items, you need to simulate the encounter enough times to see what happens most of the time. <b>That's what Combat Simulator for 5e does</b>",
+  "CS5e.INFO.MoreAboutDMG" : "The DMG, Kobold Fight Club, and other Encounter Builders all use variants of the method recommended on page 82 of the DMG which uses XP thresholds and various adjustments based on number of party members and number of opponents. As we all know, one well-placed fireball can completely change the outcome of a supposedly easy or deadly fight. If you want to know how your party will <b>really</b> do, with their actual initiative, skills, feats, and magic items, you need to simulate the encounter enough times (more than 100) to see what happens. <b>That's what Combat Simulator for 5e does.</b>",
   "CS5e.INFO.SimulationDifficulty" : "Actual difficulty from simulation (details below):",
   "CS5e.INFO.Rerun": "To tune your Encounter, leave this window open. Then change your actors in the Combat Tracker and click Simulate again."
 }

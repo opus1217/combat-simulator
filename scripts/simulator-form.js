@@ -126,9 +126,25 @@ class CombatSimulatorApplication extends Application {
       };
     }
 
+    /** @override */
     activateListeners(html) {
         super.activateListeners(html);
+        //When you click Details, show/hide the Simulation details
+        let divDetails = html.find('#showDetails');
+        if (divDetails) {
+          divDetails.click(event => this._onToggleDetails(event));
+        }
     }
+
+    //Toggle visibility of details (for now all or nothing, but we'd like to show a summary of each simulation)
+    _onToggleDetails(event) {
+      event.preventDefault();
+      let details = $(event.currentTarget).find('#details');
+      if (details) {
+        details.toggleClass("results-hidden");
+      }
+    }
+
 
     /**
      * Calculates XP thresholds for the PC characters, as well as the thresholds for monster/NPC combatants.
