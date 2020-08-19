@@ -19,8 +19,8 @@ class Simulation {
     this.friendlyTeamName = TEAM_FRIENDLIES_DEFAULT;
   	this.hostileTeamName = TEAM_HOSTILES_DEFAULT;
 
-    if (friendlyTeamName.length) this.friendlyTeamName = friendlyTeamName;
-    if (hostileTeamName.length) this.hostileTeamName = hostileTeamName;
+    if (friendlyTeamName.length) {this.friendlyTeamName = friendlyTeamName;}
+    if (hostileTeamName.length) {this.hostileTeamName = hostileTeamName;}
   }
 
 // FIXME: How do we do async here?
@@ -45,13 +45,14 @@ class Simulation {
 //FIXME: Implement Wave loop (will use Encounters within a scene to do this)
 //including potentially the next Wave arrives after a set time (e.g. 2 rounds)
       var activeEffects = [];
+      Output.initialize();
 
       var waveCombatants = remainingCombatants;
       simulationDetail += "<br>Combatants in Initiative order:";
       for (let combatant of waveCombatants) {
         simulationDetail += "<br>" + combatant.initiative + ":" + combatant.nameAndHP;
         //Trigger enduring auras for combatants in this waves
-  // FIXME:       combatant.applyEnduringAuras(waveCombatants, activeEffects);
+        combatant.applyEnduringAuras(waveCombatants, activeEffects);
       }
 
       //For each round of combat, loop in initiative order and pick opponents at random
@@ -59,16 +60,23 @@ class Simulation {
       var deadTeam = "";
       //Don't let a simulation go more than MAX_ROUNDS or declare a tie
       for (let roundNum = 1; roundNum <= MAX_ROUNDS; roundNum++) {
-        simulationDetail += "<br><br>Round #" + roundNum + "<br>Active Effects: " //FIXME + Spell.activeEffectsToString(activeEffects);
+        simulationDetail += "<br><br>Round #" + roundNum + "<br>Active Effects: " + Spell.activeEffectsToString(activeEffects);
 
         for (let combatant of waveCombatants) {
-  // FIXME:         CombatantCondition.decrementDurationOnThisInitiative(combatant.initiative, WhenInTurn.startOfTurn, waveCombatants);
+          CombatantCondition.decrementDurationOnThisInitiative(combatant.initiative, WhenInTurn.startOfTurn, waveCombatants);
           combatant.takeTurn(activeEffects, waveCombatants);
           deadTeam = Simulation.teamIsDead(waveCombatants);
           if (deadTeam) break;
 
           //Legendary actions
-// FIXME:           CombatantCondition.decrementDurationOnThisInitiative(combatant.initiative, WhenInTurn.endOfTurn, waveCombatants);
+          //Check to see if there are legendary actions that can be used (only at the end of somebody else's turn)
+          for (let legendaryCombatant in waveCombatants) {
+            if ((legendaryCombatant.currentLegendaryActions > 0) && !legendaryCombatant.isIncapacitated()
+              && (legendaryCombatant !== combatant)) {
+              legendaryCombatant.takeActionAndBonusAction(waveCombatants, activeEffects, true);
+            }
+          }
+          CombatantCondition.decrementDurationOnThisInitiative(combatant.initiative, WhenInTurn.endOfTurn, waveCombatants);
         }//end for combatants in initiative ordering
         if (deadTeam) break;
       }//end for roundNum

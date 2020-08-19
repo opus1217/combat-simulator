@@ -3,7 +3,7 @@
 //  8/10/2020  Copied/created, stubbed out
 
 //ENUMS
-const Ability = {
+/*export*/ const Ability = {
   str : "str",
   dex : "dex",
   con : "con",
@@ -12,7 +12,7 @@ const Ability = {
   cha : "cha"
 }
 
-const SkillName = {
+/*export*/ const SkillName = {
 	athletics : "athletics",
 	stealth : "stealth",
   acrobatics : "athletics",
@@ -63,7 +63,7 @@ const Race =  {
 */
 
 
-class Creature {
+/*export*/ class Creature {
   constructor(actor) {
     this.actor = actor;
     if (actor) {
@@ -111,5 +111,23 @@ class Creature {
     calculateStartingHP() {
       return this.hp.fixed;
     }
-
 }//end class Creature
+
+
+/*export*/ class Feature {
+
+
+
+
+
+  static getLegendaryActions(features) {
+    //Return how many legendary Actions are available (or none)
+    if (!features) {return null}
+    for (let feature in features) {
+      if (feature.legendaryActions) {
+        return feature.legendaryActions;
+      }
+    }
+    return null;
+  }
+}//end class Feature

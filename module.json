@@ -10,7 +10,7 @@
       "url": "https://combatsimulatorfor5e.com"
     }
   ],
-  "version": "0.1.0",
+  "version": "0.1.5",
   "minimumCoreVersion": "0.6.0",
   "compatibleCoreVersion": "0.6.5",
   "languages": [{
@@ -18,7 +18,9 @@
     "name": "English",
     "path": "lang/en.json"
   }],
-  "scripts" : ["scripts/simulator.js","scripts/simulator-form.js","scripts/Simulation.js","scripts/Combatant.js","scripts/Creature.js","scripts/Dice.js"],
+  "scripts" : ["scripts/simulator.js","scripts/simulator-form.js",
+    "scripts/Simulation.js","scripts/Combatant.js","scripts/Creature.js","scripts/Dice.js","scripts/Globals.js","scripts/Spell.js","scripts/Action.js","scripts/Condition.js"
+  ],
   "styles": ["css/combat-simulator.css"],
   "system": "dnd5e",
   "readme": "https://readme.combatsimulatorfor5e.com",
