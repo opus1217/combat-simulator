@@ -1,51 +1,69 @@
 import {CombatSimulatorApplication} from './simulator-form.js';
-const MODULE_NAME = "combat-simulator"
+import {loadReferenceData} from './Globals.js';
+import {Spell} from './Spell.js';
+export const MODULE_NAME = "combat-simulator";
 //Global variable for combatTrackerSimulate
+
+/*
+26-Aug-2020   Add async call to load Spell Reference during init
+
+
+
+
+
+*/
 
 class CombatSimulator {
   static init() {
-    game.settings.register(MODULE_NAME, "combatSimulatorVersion", {
-      name: "CombatSimulatorFor5e ver 0.1.0",
-      hint: "",
-      scope: "world",
-      config: false,
-      default: "0.1.0",
-      type: String
-    });
-    game.settings.register(MODULE_NAME, "combatTrackerSimulate", {
-      name: game.i18n.localize("CS5e.SETTING.Simulate.Name"),
-      hint: game.i18n.localize("CS5e.SETTING.Simulate.Hint"),
-      scope: "client",
-      config: true,
-      default: false,
-      // onChange: value => {replaceBeginCombat(game.combat)},
-      type: Boolean
-    });
-    game.settings.register(MODULE_NAME, "numberOfSimulations", {
-      name: game.i18n.localize("CS5e.SETTING.NumberOfSimulations.Name"),
-      hint: game.i18n.localize("CS5e.SETTING.NumberOfSimulations.Hint"),
-      scope: "world",
-      config: true,
-      default: 100,
-      type: Number,
-      range: {             // If range is specified, the resulting setting will be a range slider
-        min: 1,
-        max: 1000,
-        step: 100
-      }
-    });
-    game.settings.register(MODULE_NAME, "showCombatDetail", {
-      name: game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Name"),
-      hint: game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Hint"),
-      scope: "world",
-      config: true,
-      choices: {
-        "Summary": game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Summary"),
-        "Detail": game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Detail")
-      },
-      default: "Summary",
-      type: String
-    });
+      game.settings.register(MODULE_NAME, "combatSimulatorVersion", {
+        name: "CombatSimulatorFor5e ver 0.1.0",
+        hint: "",
+        scope: "world",
+        config: false,
+        default: "0.1.0",
+        type: String
+      });
+      game.settings.register(MODULE_NAME, "combatTrackerSimulate", {
+        name: game.i18n.localize("CS5e.SETTING.Simulate.Name"),
+        hint: game.i18n.localize("CS5e.SETTING.Simulate.Hint"),
+        scope: "client",
+        config: true,
+        default: false,
+        // onChange: value => {replaceBeginCombat(game.combat)},
+        type: Boolean
+      });
+      game.settings.register(MODULE_NAME, "numberOfSimulations", {
+        name: game.i18n.localize("CS5e.SETTING.NumberOfSimulations.Name"),
+        hint: game.i18n.localize("CS5e.SETTING.NumberOfSimulations.Hint"),
+        scope: "world",
+        config: true,
+        default: 100,
+        type: Number,
+        range: {             // If range is specified, the resulting setting will be a range slider
+          min: 1,
+          max: 1000,
+          step: 100
+        }
+      });
+      game.settings.register(MODULE_NAME, "showCombatDetail", {
+        name: game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Name"),
+        hint: game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Hint"),
+        scope: "world",
+        config: true,
+        choices: {
+          "Summary": game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Summary"),
+          "Detail": game.i18n.localize("CS5e.SETTING.ShowCombatDetail.Detail")
+        },
+        default: "Summary",
+        type: String
+      });
+      //Start the loading of the spell data - will check for this the first time we run a simulation
+      CombatSimulator.spellReferencePromise = loadReferenceData(
+        `modules/${MODULE_NAME}/data/spells_SRD.json`,
+        `modules/${MODULE_NAME}/data/spells_PHB-SRD.json`,
+        `modules/${MODULE_NAME}/data/spells_XGE.json`
+      );
+
   }
 
 /*
@@ -79,11 +97,15 @@ async function openForm() {
     if (this.CSAForm === undefined) {
         this.CSAForm = new CombatSimulatorApplication();
     }
-    this.CSAForm.setActiveCombat(game.combat);
-    var numberOfSimulations = game.settings.get(MODULE_NAME,"numberOfSimulations");
-    var showCombatDetail =  game.settings.get(MODULE_NAME,"showCombatDetail");
-    this.CSAForm.simulate(numberOfSimulations, showCombatDetail);
-    this.CSAForm.render(true);
+
+    //Wait for the Spell data to have loaded before actually showing anything
+    CombatSimulator.spellReferencePromise.then(result => {
+        this.CSAForm.setActiveCombat(game.combat);
+        var numberOfSimulations = game.settings.get(MODULE_NAME,"numberOfSimulations");
+        var showCombatDetail =  game.settings.get(MODULE_NAME,"showCombatDetail");
+        this.CSAForm.simulate(numberOfSimulations, showCombatDetail);
+        this.CSAForm.render(true);
+    });
 }
 
 

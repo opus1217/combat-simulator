@@ -1,0 +1,985 @@
+{
+"spells": [
+	{
+		"name" : "Acid Splash", "source" : "PHB", "page" : 211,
+		"level" : 0,
+		"type" : "specific", "form" : {"num" : 2, "range" : 0 , "shape" : "dart", "size" : 60},
+		"savingThrow" : {"stat" : "dex"},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 1, "dieType" : 6} ,"damageType" : "acid"}
+		]
+	},
+	{
+		"name" : "Eldritch Blast", "source" : "PHB", "page" : 237,
+		"level" : 0,
+		"scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"type" : "ranged",
+		"spellAttack" : {
+			"num" : 1,
+			"name" : "Eldritch Blast",
+			"type" : "ranged", "reach" : 120,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 10}, "damageType" : "force"}
+			]
+		}
+	},
+	{
+		"name" : "Chill Touch", "source" : "PHB", "page" : 221,
+		"description" : "You create a ghostly, skeletal hand in the space of a creature within range. Make a ranged spell attack against the creature to assail it with the chill of the grave. On a hit, the target takes 1d8 necrotic damage, and it can't regain hit points until the start of your next turn. Until then, the hand clings to the target.",
+		"level" : 0,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Chill Touch",
+			"type" : "ranged", "reach" : 120,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 8},"damageType" : "necrotic"}
+			]
+		}
+	},
+	{
+		"name" : "Fire Bolt", "source" : "PHB", "page" : 242,
+		"description" : "You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried.",
+		"level" : 0,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Fire Bolt",
+			"type" : "ranged", "reach" : 120,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 10},"damageType" : "fire"}
+			]
+		}
+	},
+	{
+		"name" : "Poison Spray", "source" : "PHB", "page" : 266,
+		"level" : 0,
+		"type" : "specific", "form" : {"range" : 10 , "shape" : "dart", "size" : 0},
+		"savingThrow" : {"stat" : "con"},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 1, "dieType" : 12} ,"damageType" : "poison"}
+		]
+	},
+	{
+		"name" : "Produce Flame", "source" : "PHB", "page" : 269,
+		"description" : "A flickering flame appears in your hand. The flame remains there for the duration and harms neither you nor your equipment. The flame sheds bright light in a 10-foot radius and dim light for an additional 10 feet. The spell ends if you dismiss it as an action or if you cast it again. You can also attack with the flame, although doing so ends the spell. When you cast this spell, or as an action on a later turn, you can hurl the flame at a creature within 30 feet of you. Make a ranged spell attack. On a hit, the target takes 1d8 fire damage.",
+		"level" : 0,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Produce Flame",
+			"type" : "ranged", "reach" : 30,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 8},"damageType" : "fire"}
+			]
+		}
+	},
+	{
+		"name" : "Ray of Frost", "source" : "PHB", "page" : 271,
+		"level" : 0,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Ray of Frost",
+			"type" : "ranged", "reach" : 60,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 8} ,"damageType" : "cold"}
+			]
+		}
+	},
+	{
+		"name" : "Sacred Flame", "source" : "PHB", "page" : 272,
+		"level" : 0,
+		"type" : "specific", "form" : {"range" : 0 , "shape" : "ray", "size" : 60},
+		"savingThrow" : {"stat" : "con"},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 1, "dieType" : 8} ,"damageType" : "radiant"}
+		]
+	},
+	{
+		"name" : "Shillelagh","source" : "Hack to allow Druid to attack", "page" : 999,
+		"level" : 0,
+		"type" : "melee",
+		"spellAttack" : {
+			"name" : "Shillelagh",
+			"type" : "melee",
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 8} ,"damageType" : "bludgeoning"}
+			]
+		}
+	},
+	{
+		"name" : "Shocking Grasp","source" : "PHB", "page" : 275,
+		"level" : 0,
+		"type" : "melee",
+		"spellAttack" : {
+			"name" : "Shocking Grasp",
+			"type" : "melee",
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 8} ,"damageType" : "lightning"}
+			],
+			"conditions" : [
+				{"type" : "noReaction", "duration" : 0}
+			]
+		}
+	},
+	{
+		"name" : "Vicious Mockery", "source" : "PHB", "page" : 285,
+		"description" : "You unleash a string of insults laced with subtle enchantments at a creature you can see within range. If the target can hear you (though it need not understand you), it must succeed on a Wisdom saving throw or take 1d4 psychic damage and have disadvantage on the next attack roll it makes before the end of its next turn.",
+		"level" : 0,
+		"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+		"savingThrow" : {"stat" : "wis"},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 1, "dieType" : 4} ,"damageType" : "psychic"}
+		],
+		"conditions" : [{"type" : "disadvantage", "duration" : 1, "expiresOn" : {"targetOrSource" : "target", "whenInTurn" : "endOfTurn"}}]
+	},
+	{
+		"name" : "Burning Hands", "source" : "PHB", "page" : 220,
+		"level" : 1,
+		"description" : "As you hold your hands with thumbs touching and fingers spread, a thin sheet of flames shoots forth from your outstretched fingertips. Each creature in a 15-foot cone must make a Dexterity saving throw. A creature takes 3d6 fire damage on a failed save, or half as much damage on a successful one.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "cone", "size" : 15},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 6} ,"damageType" : "fire",
+			"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		]
+	},
+	{
+		"name" : "Bane","source" : "PHB", "page" : 216,
+		"level" : 1, "scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"description" : "Up to three creatures of your choice that you can see within range must make Charisma saving throws. Whenever a target that fails this saving throw makes an attack roll or a saving throw before the spell ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw. At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
+		"type" : "specific", "form" : {"num" : 1, "different" : true, "range" : 30 , "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "cha"},
+		"conditions" : [{"type" : "baned"}]
+	},
+	{
+		"name" : "Bless","source" : "PHB", "page" : 219,
+		"level" : 1, "scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"description" : "You bless up to three creatures of your choice within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target can roll a d4 and add the number rolled to the attack roll or saving throw. At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st.",
+		"targeting" : "party",
+		"type" : "specific", "form" : {"num" : 1, "different" : true, "range" : 30 , "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"conditions" : [{"type" : "blessed"}]
+	},
+	{
+		"name" : "Charm Person","source" : "PHB", "page" : 221,
+		"level" : 1,
+		"scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"description" : "You attempt to charm a humanoid you can see within range. It must make a Wisdom saving throw, and does so with advantage if you or your companions are fighting it. If it fails the saving throw, it is charmed by you until the spell ends or until you or your companions do anything harmful to it. The charmed creature regards you as a friendly acquaintance. When the spell ends, the creature knows it was charmed by you. At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.",
+		"type" : "specific", "form" : {"num" : 1, "different" : true, "range" : 30 , "size" : 0},
+		"duration" : 600, "concentration" : false,
+		"savingThrow" : {"stat" : "wis",
+			"adjustments" : [
+				{"criterion" : "allExcept", "creatureTypes": ["humanoid"],  "adjustSave" : "autoSave"},
+				{"criterion" : "only", "traits": ["Fey Ancestry"],  "adjustSave" : "advantage"},
+				{"criterion" : "whenDamaged", "adjustSave" : "autoSave"}
+			]
+		},
+		"conditions" : [{"type" : "charmed"}]
+	},
+	{
+		"name" : "Entangle", "source" : "PHB", "page" : 238,
+		"level" : 1,
+		"description" : "Grasping weeds and vines sprout from the ground in a 20-foot square starting from a point within range. For the duration, these plants turn the ground in the area into difficult terrain. A creature in the area when you cast the spell must succeed on a Strength saving throw or be restrained by the entangling plants until the spell ends. A creature restrained by the plants can use its action to make a Strength check against your spell save DC. On a success, it frees itself. When the spell ends, the conjured plants wilt away",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "cube", "size" : 20},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "str"},
+		"conditions" : [{"type" : "restrained", "whenSaved" : "action"}]
+	},
+	{
+		"name" : "Guiding Bolt", "source" : "PHB", "page" : 248,
+		"description" : "A flash of light streaks toward a creature of your choice within range. Make a ranged spell attack against the target. On a hit, the target takes 4d6 radiant damage, and the next attack roll made against this target before the end of your next turn has advantage, thanks to the mystical dim light glittering on the target until then.",
+		"level" : 1,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Guiding Bolt",
+			"type" : "ranged", "reach" : 120,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 4, "dieType" : 6} ,"damageType" : "radiant",
+				"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+			],
+			"conditions" : [
+				{"type" : "dimLight", "duration" : 1, "expiresOn" : {"targetOrSource" : "source", "whenInTurn" : "endOfTurn"}},
+				{"type" : "advantage", "prerequisites" : ["dimLight"]}
+			]
+		}
+	},
+	{
+		"name" : "Hellish Rebuke", "source" : "PHB", "page" : 250,
+		"description" : "You point your finger, and the creature that damaged you is momentarily surrounded by hellish flames. The creature must make a Dexterity saving throw. It takes 2d10 fire damage on a failed save, or half as much damage on a successful one. At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d10 for each slot level above 1st.",
+		"level" : 1, "castingTime" : "reaction",
+		"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 2, "dieType" : 10} ,"damageType" : "fire",
+			"damageScaling" : {"numDice" : 1, "dieType" : 10}}
+		]
+	},
+	{
+		"name" : "Inflict Wounds","source" : "PHB", "page" : 250,
+		"level" : 1,
+		"type" : "melee",
+		"spellAttack" : {
+			"name" : "Inflict Wounds",
+			"type" : "melee",
+			"damages" : [
+				{"diceRoll" : {"numDice" : 3, "dieType" : 10} ,"damageType" : "necrotic",
+				"damageScaling" : {"numDice" : 1, "dieType" : 10}}
+			]
+		}
+	},
+	{
+		"name" : "Magic Missile","source" : "PHB", "page" : 257,
+		"level" : 1,
+		"type" : "ranged", "autoHit" : true,
+		"spellAttack" : {
+			"name" : "Magic Missile",
+			"num" : 3,
+			"type" : "ranged", "reach" : 120,
+			"autoHit" : true,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 4}, "bonus" : 1 ,"damageType" : "force"}
+			]
+		}
+	},
+	{
+		"name" : "Hideous Laughter","source" : "PHB", "page" : 280,
+		"level" : 1,
+		"description" : "A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a Wisdom saving throw or fall prone, becoming incapacitated and unable to stand up for the duration. A creature with an Intelligence score of 4 or less isn't affected. At the end of each of its turns, and each time it takes damage, the target can make another Wisdom saving throw. The target has advantage on the saving throw if it's triggered by damage. On a success, the spell ends.",
+		"type" : "specific", "form" : {"range" : 30 , "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis",
+			"adjustments" : [
+				{"criterion" : "whenDamaged",  "adjustSave" : "repeatSave"}
+			]
+		},
+		"conditions" : [
+			{"type" : "incapacitated", "whenSaved" : "endOfTurn"}, {"type" : "prone", "prerequisites" : ["incapacitated"]}
+		]
+	},
+	{
+		"name" : "Thunderwave",	"source" : "PHB", "page" : 282,
+		"level" : 1,
+		"description" : "A wave of thunderous force sweeps out from you. Each creature in a 15-foot cube originating from you must make a Constitution saving throw. On a failed save, a creature takes 2d8 thunder damage and is pushed 10 feet away from you. On a successful save, the creature takes half as much damage and isn't pushed. In addition, unsecured objects that are completely within the area of effect are automatically pushed 10 feet away from you by the spell's effect, and the spell emits a thunderous boom audible out to 300 feet. At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "cube", "size" : 15},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [{"diceRoll" : {"numDice" : 2, "dieType" : 8} ,"damageType" : "thunder",
+			"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		]
+	},
+	{
+	"name" : "Blindness","source" : "PHB", "page" : 219,
+	"level" : 2,
+	"scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+	"description" : "You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends. At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.",
+	"type" : "specific", "form" : {"num" : 1, "different" : true, "range" : 30 , "size" : 0},
+		"duration" : 10, "concentration" : false,
+		"savingThrow" : {"stat" : "con"},
+		"conditions" : [{"type" : "blinded", "whenSaved" : "endOfTurn"}]
+	},
+	{
+		"name" : "Deafness","source" : "PHB", "page" : 219,
+		"level" : 2,
+		"scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"description" : "You can blind or deafen a foe. Choose one creature that you can see within range to make a Constitution saving throw. If it fails, the target is either blinded or deafened (your choice) for the duration. At the end of each of its turns, the target can make a Constitution saving throw. On a success, the spell ends. At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd.",
+		"type" : "specific", "form" : {"num" : 1, "different" : true, "range" : 30 , "size" : 0},
+		"duration" : 10, "concentration" : false,
+		"savingThrow" : {"stat" : "con"},
+		"conditions" : [{"type" : "deafened", "whenSaved" : "endOfTurn"}]
+	},
+	{
+		"name" : "Cloud of Daggers",	"source" : "PHB", "page" : 222,
+		"level" : 2,
+		"type" : "AoE", "form" : {"range" : 60 , "shape" : "cube", "size" : 5},
+		"damages" : [{"diceRoll" : {"numDice" : 4, "dieType" : 4} ,"damageType" : "slashing",
+					"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		],
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50}
+	},
+	{
+		"name" : "Flame Blade", "source" : "PHB", "page" : 242,
+		"level" : 2,
+		"description" : "You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke the blade again as a bonus action. You can use your action to make a melee spell attack with the fiery blade. On a hit, the target takes 3d6 fire damage. The flaming blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.",
+		"castingTime" : "bonusAction",
+		"type" : "melee",
+		"duration" : 100, "concentration" : true,
+		"associatedAction" : 	{
+			"name" : "Flame Blade - additional",
+			"castingTime" : "action",
+			"type" : "melee",
+			"spellAttack" : {
+				"name" : "Flame Blade",
+				"type" : "melee",
+				"damages" : [
+					{"diceRoll" : {"numDice" : 3, "dieType" : 6} , "damageType" : "fire"}
+				]
+			}
+		}
+	},
+	{
+		"name" : "Flaming Sphere",	"source" : "PHB", "page" : 222,
+		"level" : 2,
+		"description" : "A 5-foot-diameter sphere of fire appears in an unoccupied space of your choice within range and lasts for the duration. Any creature that ends its turn within 5 feet of the sphere must make a Dexterity saving throw. The creature takes 2d6 fire damage on a failed save, or half as much damage on a successful one. As a bonus action, you can move the sphere up to 30 feet. If you ram the sphere into a creature, that creature must make the saving throw against the sphere's damage, and the sphere stops moving this turn. When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. The sphere ignites flammable objects not being worn or carried, and it sheds bright light in a 20-foot radius and dim light for an additional 20 feet. At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.",
+		"type" : "AoE", "form" : {"range" : 60 , "shape" : "sphere", "size" : 10},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [{"diceRoll" : {"numDice" : 2, "dieType" : 6} ,"damageType" : "fire",
+					"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		]
+	},
+	{
+		"name" : "Heat Metal", "source" : "PHB", "page" : 250,
+		"description" : "Choose a manufactured metal object, such as a metal weapon or a suit of heavy or medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 fire damage when you cast the spell. Until the spell ends, you can use a bonus action on each of your subsequent turns to cause this damage again. If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn't drop the object, it has disadvantage on attack rolls and ability checks until the start of your next turn. At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.",
+		"level" : 2,
+		"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"damages" : [
+			{"diceRoll" : {"numDice" : 2, "dieType" : 8} ,"damageType" : "fire", "damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		],
+		"conditions" : [{"type" : "disadvantage", "duration" : 1}],
+		"associatedAction" : 	{
+			"name" : "Heat Metal - additional",
+			"castingTime" : "bonusAction",
+			"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+			"damages" : [
+				{"diceRoll" : {"numDice" : 2, "dieType" : 8} ,"damageType" : "fire", "damageScaling" : {"numDice" : 1, "dieType" : 8}}
+			],
+			"conditions" : [{"type" : "disadvantage", "duration" : 1}]
+		}
+	},
+	{
+		"name" : "Hold Person","source" : "PHB", "page" : 251,
+		"level" : 2,
+		"scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"description" : "Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target. At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.",
+		"type" : "specific", "form" : {"num" : 1, "different" : true, "range" : 30, "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis",
+			"adjustments" : [
+				{"criterion" : "allExcept", "creatureTypes": ["humanoid"],  "adjustSave" : "autoSave"}
+			]
+		},
+		"conditions" : [{"type" : "paralyzed", "whenSaved" : "endOfTurn"}]
+	},
+	{
+		"name" : "Acid Arrow", "source" : "PHB", "page" : 259,
+		"level" : 2,
+		"description" : "A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn. At Higher Levels: When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd. [Does not include the damage on miss]",
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Melf's Acid Arrow",
+			"type" : "ranged", "reach" : 90,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 4, "dieType" : 4} ,"damageType" : "acid",
+					"damageScaling" : {"numDice" : 1, "dieType" : 4}}
+			],
+			"conditions" : [
+				{
+					"type" : "damageOverTime", "duration" : 1,
+					"damageOverTime" : {"damageFormula" : {"diceRoll" : {"numDice" : 2, "dieType" : 4} , "damageType" : "acid",
+						"damageScaling" : {"numDice" : 1, "dieType" : 4}},
+						"whenApplied" : {"who" : "target", "whenInTurn" : "endOfTurn"}
+					}
+				}
+			]
+		}
+	},
+	{
+		"name" : "Moonbeam",
+		"level" : 2,
+		"type" : "AoE",
+		"form" : {"range" : 120 , "shape" : "cylinder", "size" : 5},
+		"duration" : 10, "concentration" : true, "behaviors" : [{"whenInTurn" : "entering"},{"whenInTurn" : "startOfTurn"}],
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 2, "dieType" : 10} ,"damageType" : "radiant",
+			"damageScaling" : {"numDice" : 1, "dieType" : 10}}
+		]
+	},
+	{
+		"name" : "Ray of Enfeeblement", "source" : "PHB", "page" : 271,
+		"description" : "A black beam of enervating energy springs from your finger toward a creature within range. Make a ranged spell attack against the target. On a hit, the target deals only half damage with weapon attacks that use Strength until the spell ends. At the end of each of the target's turns, it can make a Constitution saving throw against the spell. On a success, the spell ends.",
+		"level" : 2,
+		"concentration" : true, "duration" : 10,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Ray of Enfeeblement",
+			"type" : "ranged", "reach" : 60,
+			"conditions" : [
+				{"type" : "enfeebled", "duration" : 10, "savingThrow" : {"stat" : "con"}, "whenSaved" : "endOfTurn"}
+			]
+		}
+	},
+	{
+		"name" : "Scorching Ray", "source" : "PHB", "page" : 273,
+		"level" : 2,
+		"scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Scorching Ray",
+			"num" : 3, "type" : "ranged", "reach" : 120,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 2, "dieType" : 6} ,"damageType" : "fire"}
+			]
+		}
+	},
+	{
+		"name" : "Shatter",	"source" : "PHB", "page" : 999,
+		"level" : 2,
+		"type" : "AoE",
+		"form" : {"range" : 60 , "shape" : "sphere", "size" : 10},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [{"diceRoll" : {"numDice" : 3, "dieType" : 8} ,"damageType" : "thunder",
+					"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		]
+	},
+	{
+		"name" : "Spiritual Weapon", "source" : "PHB", "page" : 278,
+		"level" : 2,
+		"type" : "ranged", "form" : {"range" : 60 , "shape" : "bolt", "size" : 60},
+		"castingTime" : "bonusAction",
+		"duration" : 10, "concentration" : true,
+		"spellAttack" : {
+			"name" : "Spiritual Weapon",
+			"type" : "ranged", "reach" : 60,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 8} , "bonus" : 3, "damageType" : "radiant"}
+			]
+		},
+		"associatedAction" : 	{
+			"name" : "Spiritual Weapon - additional",
+			"castingTime" : "bonusAction",
+			"type" : "ranged",
+			"spellAttack" : {
+				"name" : "Spiritual Weapon",
+				"type" : "ranged", "reach" : 60,
+				"damages" : [
+					{"diceRoll" : {"numDice" : 1, "dieType" : 8} , "bonus" : 3, "damageType" : "radiant"}
+				]
+			}
+		}
+	},
+	{
+		"name" : "Web", "source" : "PHB", "page" : 287,
+		"level" : 2,
+		"description" : "You conjure a mass of thick, sticky webbing at a point of your choice within range. The webs fill a 20-foot cube from that point for the duration. The webs are difficult terrain and lightly obscure their area. If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the conjured web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.Each creature that starts its turn in the webs or that enters them during its turn must make a Dexterity saving throw. On a failed save, the creature is restrained as long as it remains in the webs or until it breaks free. A creature restrained by the webs can use its action to make a Strength check against your spell save DC. If it succeeds, it is no longer restrained. The webs are flammable. Any 5-foot cube of webs exposed to fire burns away in 1 round, dealing 2d4 fire damage to any creature that starts its turn in the fire.",
+		"type" : "AoE", "form" : {"range" : 60 , "shape" : "cube", "size" : 20},
+		"duration" : 600, "concentration" : true, "behaviors" : [{"whenInTurn" : "startOfTurn"},{"whenInTurn" : "entering"}],
+		"savingThrow" : {"stat" : "dex",
+			"adjustments" : [
+				{"criterion" : "only", "traits": ["Web Walker"], "adjustSave" : "autoSave"}
+			]
+		},
+		"conditions" : [
+			{"type" : "restrained", "whenSaved" : "action"}
+		]
+	},
+	{
+		"name" : "Call Lightning", "source" : "PHB", "page" : 220,
+		"level" : 3,
+		"description" : " A storm cloud appears in the shape of a cylinder that is 10 feet tall with a 60-foot radius, centered on a point you can see within range directly above you. The spell fails if you can't see a point in the air where the storm cloud could appear (for example, if you are in a room that can't accommodate the cloud). When you cast the spell, choose a point you can see under the cloud. A bolt of lightning flashes down from the cloud to that point. Each creature within 5 feet of that point must make a Dexterity saving throw. A creature takes 3d10 lightning damage on a failed save, or half as much damage on a successful one. On each of your turns until the spell ends, you can use your action to call down lightning in this way again, targeting the same point or a different one. If you are outdoors in stormy conditions when you cast this spell, the spell gives you control over the existing storm instead of creating a new one. Under such conditions, the spell's damage increases by 1d10.",
+		"type" : "AoE", "form" : {"range" : 120 , "shape" : "cylinder", "size" : 5},
+		"castingTime" : "action",
+		"duration" : 100, "concentration" : true,
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 10} , "damageType" : "lightning",
+			"damageScaling" : {"numDice" : 1, "dieType" : 10}}
+		],
+		"associatedAction" : 	{
+			"name" : "Call Lightning - additional",
+			"castingTime" : "action",
+			"type" : "AoE", "form" : {"range" : 60 , "shape" : "sphere", "size" : 5},
+			"damages" : [
+				{"diceRoll" : {"numDice" : 3, "dieType" : 10} , "damageType" : "lightning",
+				"damageScaling" : {"numDice" : 1, "dieType" : 10}}
+			]
+		}
+	},
+	{
+		"name" : "Fear","source" : "PHB", "page" : 239,
+		"level" : 3,
+		"description" : "You project a phantasmal image of a creature's worst fears. Each creature in a 30-foot cone must succeed on a Wisdom saving throw or drop whatever it is holding and become frightened for the duration. While frightened by this spell, a creature must take the Dash action and move away from you by the safest available route on each of its turns, unless there is nowhere to move. If the creature ends its turn in a location where it doesn't have line of sight to you, the creature can make a Wisdom saving throw. On a successful save, the spell ends for that creature.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "cone", "size" : 30},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis"},
+		"conditions" : [{"type" : "frightened", "savingThrow" : {"stat" : "wis"}, "whenSaved" : "endOfTurn"}, {"type":"incapacitated","prerequisites":["frightened"]}]
+	},
+	{
+		"name" : "Fireball",
+		"level" : 3,
+		"type" : "AoE", "form" : {"range" : 120 , "shape" : "sphere", "size" : 20},
+		"damages" : [ {"diceRoll" : {"numDice" : 8, "dieType" : 6} ,"damageType" : "fire",
+						"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50}
+	},
+	{
+		"name" : "Lightning Bolt", "source" : "PHB", "page" : 999,
+		"level" : 3,
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "line", "size" : 100},
+		"damages" : [ {"diceRoll" : {"numDice" : 8, "dieType" : 6} ,"damageType" : "lightning",
+						"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50}
+	},
+	{
+		"name" : "Hypnotic Pattern","source" : "PHB", "page" : 252,
+		"level" : 3,
+		"description" : "You create a twisting pattern of colors that weaves through the air inside a 30-foot cube within range. The pattern appears for a moment and vanishes. Each creature in the area who sees the pattern must make a Wisdom saving throw. On a failed save, the creature becomes charmed for the duration. While charmed by this spell, the creature is incapacitated and has a speed of 0. The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor.",
+		"type" : "AoE", "form" : {"range" : 120 , "shape" : "cube", "size" : 30},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis",
+			"adjustments" : [
+				{"criterion" : "only", "traits": ["Fey Ancestry"], "adjustSave" : "advantage"}
+			]
+		},
+		"conditions" : [
+			{"type" : "incapacitated"}, {"type" : "speed0"}
+		]
+	},
+	{
+		"name" : "Slow","source" : "PHB", "page" : 277,
+		"level" : 3, "scaling" : {"shouldUpCast" : false},
+		"description" : "You alter time around up to six creatures of your choice in a 40-foot cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration. An affected target's speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can't use reactions. On its turn, it can use either an action or a bonus action, not both. Regardless of the creature's abilities or magic items, it can't make more than one melee or ranged attack during its turn. If the creature attempts to cast a spell with a casting time of 1 action, roll a d20. On an 11 or higher, the spell doesn't take effect until the creature's next turn, and the creature must use its action on that turn to complete the spell. If it can't, the spell is wasted. A creature affected by this spell makes another Wisdom saving throw at the end of each of its turns. On a successful save, the effect ends for it.",
+		"type" : "specific", "form" : {"num" : 6, "different" : true, "range" : 120 , "shape" : "cube", "size" : 40},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis"},
+		"conditions" : [
+			{"type" : "slowed", "whenSaved" : "endOfTurn"}
+		]
+	},
+	{
+		"name" : "Spirit Guardians","source" : "PHB", "page" : 278,
+		"level" : 3,
+		"description" : "You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish. When you cast this spell, you can designate any number of creatures you can see to be unaffected by it. An affected creature's speed is halved in the area, and when the creature enters the area for the first time on a turn or starts its turn there, it must make a Wisdom saving throw. On a failed save, the creature takes 3d8 radiant damage (if you are good or neutral) or 3d8 necrotic damage (if you are evil). On a successful save, the creature takes half as much damage. At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "cylinder", "size" : 15},
+		"duration" : 100, "concentration" : true, "behaviors" : [{"whenInTurn" : "startOfTurn"},{"whenInTurn" : "entering"}],
+		"savingThrow" : {"stat" : "wis", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 8} ,"damageType" : "radiant",
+				"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		]
+	},
+	{
+		"name" : "Stinking Cloud", "source" : "PHB", "page" : 278,
+		"level" : 3, "scaling" : {"shouldUpCast" : false},
+		"description" : "You create a 20-foot-radius sphere of yellow, nauseating gas centered on a point within range. The cloud spreads around corners, and its area is heavily obscured. The cloud lingers in the air for the duration. Each creature that is completely within the cloud at the start of its turn must make a Constitution saving throw against poison. On a failed save, the creature spends its action that turn retching and reeling. Creatures that don't need to breathe or are immune to poison automatically succeed on this saving throw. A moderate wind (at least 10 miles per hour) disperses the cloud after 4 rounds. A strong wind (at least 20 miles per hour) disperses it after 1 round.",
+		"type" : "AoE", "form" : {"range" : 90 , "shape" : "sphere", "size" : 20},
+		"duration" : 10, "concentration" : true, "behaviors" : [{"whenInTurn" : "startOfTurn"}],
+		"savingThrow" : {"stat" : "con"},
+		"conditions" : [
+			{"type" : "incapacitated", "duration" : 1}
+		]
+	},
+	{
+		"name" : "Vampiric Touch", "source" : "PHB", "page" : 285,
+		"level" : 3,
+		"description" : "The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against a creature within your reach. On a hit, the target takes 3d6 necrotic damage, and you regain hit points equal to half the amount of necrotic damage dealt. Until the spell ends, you can make the attack again on each of your turns as an action. At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d6 for each slot level above 3rd.",
+		"type" : "melee",
+		"duration" : 10, "concentration" : true,
+		"spellAttack" : {
+			"name" : "Vampiric Touch",
+			"type" : "melee",
+			"damages" : [
+				{"diceRoll" : {"numDice" : 3, "dieType" : 6} ,
+					"damageType" : "necrotic", "drainsHPPercent" : 50,
+					"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+			]
+		},
+		"associatedAction" : 	{
+			"name" : "Vampiric Touch - additional",
+			"castingTime" : "action",
+			"type" : "melee",
+			"spellAttack" : {
+				"name" : "Vampiric Touch - additional",
+				"type" : "melee",
+				"damages" : [
+					{"diceRoll" : {"numDice" : 3, "dieType" : 6} , "damageType" : "necrotic",
+					"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+				]
+			}
+		}
+	},
+	{
+		"name" : "Wind Wall","source" : "PHB", "page" : 288,
+		"level" : 3,
+		"description" : "A wall of strong wind rises from the ground at a point you choose within range. You can make the wall up to 50 feet long, 15 feet high, and 1 foot thick. You can shape the wall in any way you choose so long as it makes one continuous path along the ground. The wall lasts for the duration. When the wall appears, each creature within its area must make a Strength saving throw. A creature takes 3d8 bludgeoning damage on a failed save, or half as much damage on a successful one. The strong wind keeps fog, smoke, and other gases at bay. Small or smaller flying creatures or objects can't pass through the wall. Loose, lightweight materials brought into the wall fly upward. Arrows, bolts, and other ordinary projectiles launched at targets behind the wall are deflected upward and automatically miss. (Boulders hurled by giants or siege engines, and similar projectiles, are unaffected.) Creatures in gaseous form can't pass through it.",
+		"type" : "AoE", "form" : {"range" : 120 , "shape" : "line", "size" : 50},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "str", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 8} ,"damageType" : "bludgeoning"}
+		]
+	},
+	{
+		"name" : "Blight", "source" : "PHB", "page" : 219,
+		"level" : 4,
+		"type" : "specific", "form" : {"range" : 30 , "shape" : "line", "size" : 0},
+		"damages" : [{"diceRoll" : {"numDice" : 8, "dieType" : 8} ,"damageType" : "necrotic",
+						"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		],
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50}
+	},
+	{
+		"name" : "Control Water", "source" : "PHB", "page" : 227,
+		"level" : 4,
+		"description" : "Whirlpool. This effect requires a body of water at least 50 feet square and 25 feet deep. You cause a whirlpool to form in the center of the area. The whirlpool forms a vortex that is 5 feet wide at the base, up to 50 feet wide at the top, and 25 feet tall. Any creature or object in the water and within 25 feet of the vortex is pulled 10 feet toward it. A creature can swim away from the vortex by making a Strength (Athletics) check against your spell save DC. When a creature enters the vortex for the first time on a turn or starts its turn there, it must make a Strength saving throw. On a failed save, the creature takes 2d8 bludgeoning damage and is caught in the vortex until the spell ends. On a successful save, the creature takes half damage, and isn't caught in the vortex. A creature caught in the vortex can use its action to try to swim away from the vortex as described above, but has disadvantage on the Strength (Athletics) check to do so. The first time each turn that an object enters the vortex, the object takes 2d8 bludgeoning damage; this damage occurs each round it remains in the vortex.",
+		"type" : "AoE",
+		"form" : {"range" : 300 , "shape" : "cylinder", "size" : 25},
+		"duration" : 100, "behaviors" : [{"whenInTurn" : "startOfTurn"},{"whenInTurn" : "entering"}],
+		"savingThrow" : {"stat" : "str", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 2, "dieType" : 8} , "damageType" : "bludgeoning"}
+		],
+		"conditions" : [
+			{"type" : "restrained", "duration" : 10, "savingThrow" : {"stat" : "str"}, "whenSaved" : "action"}
+		]
+	},
+	{
+		"name" : "Black Tentacles", "source" : "PHB", "page" : 238,
+		"level" : 4,
+		"description" : "Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the duration, these tentacles turn the ground in the area into difficult terrain. When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a Dexterity saving throw or take 3d6 bludgeoning damage and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes 3d6 bludgeoning damage. A creature restrained by the tentacles can use its action to make a Strength or Dexterity check (its choice) against your spell save DC. On a success, it frees itself.",
+		"type" : "AoE", "form" : {"range" : 90 , "shape" : "sphere", "size" : 20},
+		"duration" : 10, "concentration" : true, "behaviors" : [{"whenInTurn" : "startOfTurn"},{"whenInTurn" : "entering"}],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 6} ,"damageType" : "bludgeoning"}
+		],
+		"conditions" : [
+			{"type" : "restrained", "duration" : 10, "savingThrow" : {"stat" : "str"}, "whenSaved" : "action"}
+		]
+	},
+	{
+		"name" : "Guardian of Faith","source" : "PHB", "page" : 246,
+		"level" : 4,
+		"description" : "A Large spectral guardian appears and hovers for the duration in an unoccupied space of your choice that you can see within range. The guardian occupies that space and is indistinct except for a gleaming sword and shield emblazoned with the symbol of your deity. Any creature hostile to you that moves to a space within 10 feet of the guardian for the first time on a turn must succeed on a Dexterity saving throw. The creature takes 20 radiant damage on a failed save, or half as much damage on a successful one. The guardian vanishes when it has dealt a total of 60 damage",
+		"type" : "AoE","form" : {"range" : 30 , "shape" : "cylinder", "size" : 10},
+		"duration" : 800,"behaviors" : [{"whenInTurn" : "startOfTurn"},{"whenInTurn" : "entering"}],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 1, "dieType" : 1} , "bonus" : 19, "damageType" : "radiant"}
+		]
+	},
+	{
+		"name" : "Ice Storm",
+		"level" : 4,
+		"description" : "A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder centered on a point within range. Each creature in the cylinder must make a Dexterity saving throw. A creature takes 2d8 bludgeoning damage and 4d6 cold damage on a failed save, or half as much damage on a successful one. Hailstones turn the storm's area of effect into difficult terrain until the end of your next turn. At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, the bludgeoning damage increases by 1d8 for each slot level above 4th.",
+		"type" : "AoE", "form" : {"range" : 300 , "shape" : "cylinder", "size" : 20},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 2, "dieType" : 8} ,"damageType" : "bludgeoning",
+			"damageScaling" : {"numDice" : 1, "dieType" : 8}},
+			{"diceRoll" : {"numDice" : 4, "dieType" : 6} ,"damageType" : "cold"}
+		]
+	},
+	{
+		"name" : "Faithful Hound","source" : "PHB", "page" : 261,
+		"level" : 4,
+		"description" : "You conjure a phantom watchdog in an unoccupied space that you can see within range, where it remains for the duration, until you dismiss it as an action, or until you move more than 100 feet away from it. The hound is invisible to all creatures except you and can't be harmed. When a Small or larger creature comes within 30 feet of it without first speaking the password that you specify when you cast this spell, the hound starts barking loudly. The hound sees invisible creatures and can see into the Ethereal Plane. It ignores illusions. At the start of each of your turns, the hound attempts to bite one creature within 5 feet of it that is hostile to you. The hound's attack bonus is equal to your spellcasting ability modifier + your proficiency bonus. On a hit, it deals 4d8 piercing damage.",
+		"type" : "melee","form" : {"range" : 30 , "shape" : "cylinder", "size" : 10},
+		"duration" : 4800,"behaviors" : [{"whenInTurn" : "startOfTurn"}],
+		"damages" : [
+			{"diceRoll" : {"numDice" : 4, "dieType" : 8} , "damageType" : "piercing"}
+		]
+	},
+	{
+		"name" : "Phantasmal Killer", "source" : "PHB", "page" : 265,
+		"level" : 4,
+		"description" : "You tap into the nightmares of a creature you can see within range and create an illusory manifestation of its deepest fears, visible only to that creature. The target must make a Wisdom saving throw. On a failed save, the target becomes frightened for the duration. At the end of each of the target's turns before the spell ends, the target must succeed on a Wisdom saving throw or take 4d10 psychic damage. On a successful save, the spell ends. At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d10 for each slot level above 4th.",
+		"type" : "specific", "form" : {"range" : 120 , "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis"},
+		"conditions" : [
+			{"type" : "frightened", "whenSaved" : "endOfTurn", "savingThrow" : {"stat" : "wis"}}
+		],
+		"behaviors" : [
+			{"whenInTurn" : "initial"},
+			{"whenInTurn" : "endOfTurn",
+				"damages" : [
+					{"diceRoll" : {"numDice" : 4, "dieType" : 10} , "damageType" : "psychic", "damageScaling" : {"numDice" : 1, "dieType" : 10}}
+				]
+			}
+		]
+	},
+	{
+		"name" : "Wall of Fire", "source" : "PHB", "page" : 285,
+		"level" : 4,
+		"description" : "You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration. When the wall appears, each creature within its area must make a Dexterity saving throw. On a failed save, a creature takes 5d8 fire damage, or half as much damage on a successful save. One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage. At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, the damage increases by 1d8 for each slot level above 4th.",
+		"type" : "AoE", "form" : {"range" : 120 , "shape" : "cylinder", "size" : 10},
+		"duration" : 10, "concentration" : true, "behaviors" : [{"whenInTurn" : "initial"},{"whenInTurn" : "entering"},{"whenInTurn" : "endOfTurn"}],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [{"diceRoll" : {"numDice" : 5, "dieType" : 8} , "damageType" : "fire",
+					"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		]
+	},
+	{
+		"name" : "Cloudkill", "source" : "PHB", "page" : 222,
+		"level" : 5,
+		"description" : "You create a 20-foot-radius sphere of poisonous, yellow-green fog centered on a point you choose within range. The fog spreads around corners. It lasts for the duration or until strong wind disperses the fog, ending the spell. Its area is heavily obscured. When a creature enters the spell's area for the first time on a turn or starts its turn there, that creature must make a Constitution saving throw. The creature takes 5d8 poison damage on a failed save, or half as much damage on a successful one. Creatures are affected even if they hold their breath or don't need to breathe. The fog moves 10 feet away from you at the start of each of your turns, rolling along the surface of the ground. The vapors, being heavier than air, sink to the lowest level of the land, even pouring down openings. At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.",
+		"type" : "AoE", "form" : {"range" : 120 , "shape" : "sphere", "size" : 20},
+		"duration" : 100, "concentration" : true, "behaviors" : [{"whenInTurn" : "entering"},{"whenInTurn" : "startOfTurn"}],
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [{"diceRoll" : {"numDice" : 5, "dieType" : 8} , "damageType" : "poison",
+					"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		]
+	},
+	{
+		"name" : "Cone of Cold", "source" : "PHB", "page" : 224,
+		"level" : 5,
+		"type" : "AoE","form" : {"range" : 0 , "shape" : "cone", "size" : 60},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 8, "dieType" : 8} ,"damageType" : "cold","damageScaling" : {"numDice" : 1, "dieType" : 8}}
+		]
+	},
+	{
+		"name" : "Flame Strike", "source" : "PHB", "page" : 242,
+		"level" : 5,
+		"description" : "A vertical column of divine fire roars down from the heavens in a location you specify. Each creature in a 10-foot-radius, 40-foot-high cylinder centered on a point within range must make a Dexterity saving throw. A creature takes 4d6 fire damage and 4d6 radiant damage on a failed save, or half as much damage on a successful one. At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the fire damage or the radiant damage (your choice) increases by 1d6 for each slot level above 5th.",
+		"type" : "AoE", "form" : {"range" : 60 , "shape" : "cylinder", "size" : 10},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 4, "dieType" : 6} ,"damageType" : "fire",
+				"damageScaling" : {"numDice" : 1, "dieType" : 6}},
+			{"diceRoll" : {"numDice" : 4, "dieType" : 6} ,"damageType" : "radiant",
+				"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		]
+	},
+	{
+		"name" : "Hold Monster","source" : "PHB", "page" : 251,
+		"level" : 5,
+		"scaling" : {"shouldUpCast" : true, "numAttacksScaling" : 1},
+		"description" : "Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. This spell has no effect on undead. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target. At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, you can target one additional creature for each slot level above 5th. The creatures must be within 30 feet of each other when you target them.",
+		"type" : "specific", "form" : {"num" : 1, "different" : true, "range" : 30, "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis",
+			"adjustments" : [
+				{"criterion" : "only", "creatureTypes" : ["undead"], "adjustSave" : "autoSave"}
+			]
+		},
+		"conditions" : [{"type" : "paralyzed", "whenSaved" : "endOfTurn"}]
+	},
+	{
+		"name" : "Insect Plague","source" : "PHB", "page" : 254,
+		"level" : 5,
+		"type" : "AoE", "form" : {"range" : 300 , "shape" : "sphere", "size" : 20},
+		"duration" : 100, "concentration" : true, "behaviors" : [{"whenInTurn" : "initial"},{"whenInTurn" : "entering"},{"whenInTurn" : "endOfTurn"}],
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 4, "dieType" : 10} ,"damageType" : "piercing",
+			"damageScaling" : {"numDice" : 1, "dieType" : 10}}
+		]
+	},
+	{
+		"name" : "Blade Barrier","source" : "PHB", "page" : 218,
+		"level" : 6,
+		"description" : "You create a vertical wall of whirling, razor-sharp blades made of magical energy. The wall appears within range and lasts for the duration. You can make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides three-quarters cover to creatures behind it, and its space is difficult terrain. When a creature enters the wall's area for the first time on a turn or starts its turn there, the creature must make a Dexterity saving throw. On a failed save, the creature takes 6d10 slashing damage. On a successful save, the creature takes half as much damage.",
+		"type" : "AoE", "form" : {"range" : 90 , "shape" : "line", "size" : 100},
+		"duration" : 100, "concentration" : true, "behaviors" : [{"whenInTurn" : "entering"},{"whenInTurn" : "startOfTurn"}],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 6, "dieType" : 10} ,"damageType" : "slashing"}
+		]
+	},
+	{
+		"name" : "Chain Lightning",	"source" : "PHB", "page" : 221,
+		"_comment_" : "Implemented as 4 beams which auto-hit and then are saved against - Upcasting gives extra bolts",
+		"level" : 6, "scaling" : {"numAttacksScaling" : 1},
+		"type" : "specific",
+		"form" : {"num" : 4, "different" : true, "range" : 0 , "shape" : "line", "size" : 180},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 10, "dieType" : 8} ,"damageType" : "lightning"}
+		],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50}
+	},
+	{
+		"name" : "Circle of Death","source" : "PHB", "page" : 221,
+		"level" : 6,
+		"description" : "You strike the ground, creating a burst of divine energy that ripples outward from you. Each creature you choose within 30 feet of you must succeed on a Constitution saving throw or take 5d6 thunder damage, as well as 5d6 radiant or necrotic damage (your choice), and be knocked prone. A creature that succeeds on its saving throw takes half as much damage and isn't knocked prone.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "sphere", "size" : 30},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 5, "dieType" : 6} ,"damageType" : "thunder"},
+			{"diceRoll" : {"numDice" : 5, "dieType" : 6} ,"damageType" : "radiant"}
+		],
+		"conditions" : [{"type" : "prone", "whenSaved" : "startOfTurn"}]
+	},
+	{
+		"name" : "Disintegrate", "source" : "PHB", "page" : 233,
+		"level" : 6,
+		"description" : "A thin green ray springs from your pointing finger to a target that you can see within range. The target can be a creature, an object, or a creation of magical force, such as the wall created by wall of force. A creature targeted by this spell must make a Dexterity saving throw. On a failed save, the target takes 10d6 + 40 force damage. The target is disintegrated if this damage leaves it with 0 hit points. A disintegrated creature and everything it is wearing and carrying, except magic items, are reduced to a pile of fine gray dust. The creature can be restored to life only by means of a true resurrection or a wish spell. This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If the target is a Huge or larger object or creation of force, this spell disintegrates a 10-foot-cube portion of it. A magic item is unaffected by this spell. At Higher Levels. When you cast this spell using a spell slot of 7th level or higher, the damage increases by 3d6 for each slot level above 6th.",
+		"type" : "specific", "form" : {"range" : 0 , "shape" : "ray", "size" : 60},
+		"savingThrow" : {"stat" : "dex"},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 10, "dieType" : 6} , "bonus" : 40, "damageType" : "force",
+				"damageScaling" : {"numDice" : 3, "dieType" : 6}}
+		]
+	},
+	{
+		"name" : "Harm", "source" : "PHB", "page" : 249,
+		"level" : 6,
+		"description" : "You unleash a virulent disease on a creature that you can see within range. The target must make a Constitution saving throw. On a failed save, it takes 14d6 necrotic damage, or half as much damage on a successful save. The damage can't reduce the target's hit points below 1. If the target fails the saving throw, its hit point maximum is reduced for 1 hour by an amount equal to the necrotic damage it took. Any effect that removes a disease allows a creature's hit point maximum to return to normal before that time passes.",
+		"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 14, "dieType" : 6} , "damageType" : "necrotic"}
+		]
+	},
+	{
+		"name" : "Otiluke's Freezing Sphere","source" : "PHB", "page" : 263,
+		"level" : 6,
+		"description" : "A frigid globe of cold energy streaks from your fingertips to a point of your choice within range, where it explodes in a 60-foot-radius sphere. Each creature within the area must make a Constitution saving throw. On a failed save, a creature takes 10d6 cold damage. On a successful save, it takes half as much damage. If the globe strikes a body of water or a liquid that is principally water (not including water-based creatures), it freezes the liquid to a depth of 6 inches over an area 30 feet square. This ice lasts for 1 minute. Creatures that were swimming on the surface of frozen water are trapped in the ice. A trapped creature can use an action to make a Strength check against your spell save DC to break free...At Higher Levels. When you cast this spell using a spell slot of 7th level or higher, the damage increases by 1d6 for each slot level above 6th.",
+		"type" : "specific", "form" : {"range" : 300 , "shape" : "sphere", "size" : 60},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [ {"diceRoll" : {"numDice" : 10, "dieType" : 6} ,"damageType" : "cold",
+						"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		]
+	},
+	{
+		"name" : "Sunbeam", "source" : "PHB", "page" : 279,
+		"level" : 6,
+		"description" : "A beam of brilliant light flashes out from your hand in a 5-foot-wide, 60-foot-long line. Each creature in the line must make a Constitution saving throw. On a failed save, a creature takes 6d8 radiant damage and is blinded until your next turn. On a successful save, it takes half as much damage and isn't blinded by this spell. Undead and oozes have disadvantage on this saving throw. You can create a new line of radiance as your action on any turn until the spell ends. For the duration, a mote of brilliant radiance shines in your hand. It sheds bright light in a 30-foot radius and dim light for an additional 30 feet. This light is sunlight.",
+		"duration" : 10, "concentration" : true,
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "line", "size" : 60}, "behaviors" : [{"whenInTurn" : "initial"}],
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50,
+			"adjustments" : [
+				{"criterion" : "only", "creatureTypes": ["undead","ooze"],  "adjustSave" : "disadvantage"}
+			]
+		},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 6, "dieType" : 8} ,"damageType" : "radiant"}
+		],
+		"conditions" : [{"type" : "blinded", "duration" : 1}],
+		"associatedAction" : {
+			"name" : "Sunbeam - additional",
+			"castingTime" : "action",
+			"type" : "AoE", "form" : {"range" : 0 , "shape" : "line", "size" : 60},
+			"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50,
+				"adjustments" : [
+					{"criterion" : "only", "creatureTypes": ["undead","ooze"],  "adjustSave" : "disadvantage"}
+				]
+			},
+			"damages" : [
+				{"diceRoll" : {"numDice" : 6, "dieType" : 8} ,"damageType" : "radiant"}
+			],
+			"conditions" : [{"type" : "blinded", "duration" : 1}]
+		}
+	},
+	{
+		"name" : "Delayed Blast Fireball",
+		"level" : 7,
+		"description" : "A beam of yellow light flashes from your pointing finger, then condenses to linger at a chosen point within range as a glowing bead for the duration. When the spell ends, either because your concentration is broken or because you decide to end it, the bead blossoms with a low roar into an explosion of flame that spreads around corners. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A creature takes fire damage equal to the total accumulated damage on a failed save, or half as much damage on a successful one. The spell's base damage is 12d6. If at the end of your turn the bead has not yet detonated, the damage increases by 1d6. If the glowing bead is touched before the interval has expired, the creature touching it must make a Dexterity saving throw. On a failed save, the spell ends immediately, causing the bead to erupt in flame. On a successful save, the creature can throw the bead up to 40 feet. When it strikes a creature or a solid object, the spell ends, and the bead explodes. The fire damages objects in the area and ignites flammable objects that aren't being worn or carried. At Higher Levels. When you cast this spell using a spell slot of 8th level or higher, the base damage increases by 1d6 for each slot level above 7th.",
+		"type" : "AoE", "form" : {"range" : 150 , "shape" : "sphere", "size" : 20},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 12, "dieType" : 6} ,"damageType" : "fire",
+				"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		]
+	},
+	{
+		"name" : "Finger of Death", "source" : "PHB", "page" : 241,
+		"level" : 7,
+		"description" : "You send negative energy coursing through a creature that you can see within range, causing it searing pain. The target must make a Constitution saving throw. It takes 7d8 + 30 necrotic damage on a failed save, or half as much damage on a successful one. A humanoid killed by this spell rises at the start of your next turn as a zombie that is permanently under your command, following your verbal orders to the best of its ability.",
+		"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 7, "dieType" : 8} , "bonus" : 30, "damageType" : "necrotic"}
+		]
+	},
+	{
+		"name" : "Fire Storm",
+		"level" : 7,
+		"description" : "A storm made up of sheets of roaring flame appears in a location you choose within range. The area of the storm consists of up to ten 10-foot cubes, which you can arrange as you wish. Each cube must have at least one face adjacent to the face of another cube. Each creature in the area must make a Dexterity saving throw. It takes 7d10 fire damage on a failed save, or half as much damage on a successful one. The fire damages objects in the area and ignites flammable objects that aren't being worn or carried. If you choose, plant life in the area is unaffected by this spell.",
+		"type" : "AoE", "form" : {"range" : 150 , "shape" : "cube", "size" : 33},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 7, "dieType" : 10} ,"damageType" : "fire"}
+		]
+	},
+	{
+		"name" : "Arcane Sword", "source" : "PHB", "page" : 289,
+		"level" : 7, "description" : "You create a sword-shaped plane of force that hovers within range. It lasts for the duration. When the sword appears, you make a melee spell attack against a target of your choice within 5 feet of the sword. On a hit, the target takes 3d10 force damage. Until the spell ends, you can use a bonus action on each of your turns to move the sword up to 20 feet to a spot you can see and repeat this attack against the same target or a different one.",
+		"type" : "melee",
+		"duration" : 10, "concentration" : true,
+		"spellAttack" : {
+			"name" : "Mordenkainen's Sword",
+			"type" : "melee", "reach" : 60,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 3, "dieType" : 10} , "damageType" : "force"}
+			]
+		},
+		"associatedAction" : 	{
+			"name" : "Mordenkainen's Sword - additional",
+			"castingTime" : "bonusAction",
+			"type" : "melee",
+			"spellAttack" : {
+				"name" : "Mordenkainen's Sword",
+				"type" : "melee", "reach" : 60,
+				"damages" : [
+					{"diceRoll" : {"numDice" : 3, "dieType" : 10} , "damageType" : "force"}
+				]
+			}
+		}
+	},
+	{
+		"name" : "Prismatic Spray",
+		"level" : 7,
+		"description" : "Eight multicolored rays of light flash from your hand. Each ray is a different color and has a different power and purpose. Each creature in a 60-foot cone must make a Dexterity saving throw. For each target, roll a d8 to determine which color ray affects it. 1-Red. The target takes 10d6 fire damage on a failed save, or half as much damage on a successful one. 2-Orange. The target takes 10d6 acid damage on a failed save, or half as much damage on a successful one. 3-Yellow. The target takes 10d6 lightning damage on a failed save, or half as much damage on a successful one. 4-Green. The target takes 10d6 poison damage on a failed save, or half as much damage on a successful one. 5-Blue. The target takes 10d6 cold damage on a failed save, or half as much damage on a successful one. 6-Indigo. On a failed save, the target is restrained. It must then make a Constitution saving throw at the end of each of its turns. If it successfully saves three times, the spell ends. If it fails its save three times, it permanently turns to stone and is subjected to the petrified condition. The successes and failures don't need to be consecutive, keep track of both until the target collects three of a kind. 7-Violet. On a failed save, the target is blinded. It must then make a Wisdom saving throw at the start of your next turn. A successful save ends the blindness. If it fails that save, the creature is transported to another plane of existence of the DM's choosing and is no longer blinded. (Typically, a creature that is on a plane that isn't its home plane is banished home, while other creatures are usually cast into the Astral or Ethereal planes.) 8-Special. The target is struck by two rays. Roll twice more, rerolling any 8.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "cone", "size" : 60},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 10, "dieType" : 6} ,"damageType" : "acid"}
+		]
+	},
+	{
+		"name" : "Incendiary Cloud", "source" : "PHB", "page" : 285,
+		"level" : 8,
+		"description" : "A swirling cloud of smoke shot through with white-hot embers appears in a 20-foot-radius sphere centered on a point within range. The cloud spreads around corners and is heavily obscured. It lasts for the duration or until a wind of moderate or greater speed (at least 10 miles per hour) disperses it. When the cloud appears, each creature in it must make a Dexterity saving throw. A creature takes 10d8 fire damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw when it enters the spell's area for the first time on a turn or ends its turn there. The cloud moves 10 feet directly away from you in a direction that you choose at the start of each of your turns.",
+		"type" : "AoE", "form" : {"range" : 150 , "shape" : "sphere", "size" : 20},
+		"duration" : 10, "concentration" : true, "behaviors" : [{"whenInTurn" : "initial"},{"whenInTurn" : "entering"},{"whenInTurn" : "endOfTurn"}],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [{"diceRoll" : {"numDice" : 10, "dieType" : 8} , "damageType" : "fire"}
+		]
+	},
+	{
+		"name" : "Sunburst", "source" : "PHB", "page" : 150,
+		"level" : 8,
+		"description" : "Brilliant sunlight flashes in a 60-foot radius centered on a point you choose within range. Each creature in that light must make a Constitution saving throw. On a failed save, a creature takes 12d6 radiant damage and is blinded for 1 minute. On a successful save, it takes half as much damage and isn't blinded by this spell. Undead and oozes have disadvantage on this saving throw. A creature blinded by this spell makes another Constitution saving throw at the end of each of its turns. On a successful save, it is no longer blinded. This spell dispels any darkness in its area that was created by a spell.",
+		"type" : "AoE", "form" : {"range" : 150 , "shape" : "sphere", "size" : 60},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50,
+			"adjustments" : [
+				{"adjustSave" : "disadvantage", "criterion" : "only", "creatureTypes": ["undead","ooze"] }
+			]
+		},
+		"damages" : [{"diceRoll" : {"numDice" : 12, "dieType" : 6} , "damageType" : "radiant"}
+		],
+		"conditions" : [{"type" : "blinded", "duration" : 10, "savingThrow" : {"stat" : "con"}, "whenSaved" : "endOfTurn"}]
+	},
+	{
+		"name" : "Power Word Stun", "source" : "PHB", "page" : 267,
+		"level" : 8,
+		"description" : "You speak a word of power that can overwhelm the mind of one creature you can see within range, leaving it dumbfounded. If the target has 150 hit points or fewer, it is stunned. Otherwise, the spell has no effect. The stunned target must make a Constitution saving throw at the end of each of its turns. On a successful save, this stunning effect ends",
+		"type" : "specific", "form" : {"range" : 60 ,  "size" : 0},
+		"conditions" : [{"type" : "stunned", "savingThrow" : {"stat" : "con"}, "whenSaved" : "endOfTurn"}]
+	},
+	{
+		"name" : "Weird", "source" : "PHB", "page" : 288,
+		"level" : 9,
+		"description" : "Drawing on the deepest fears of a group of creatures, you create illusory creatures in their minds, visible only to them. Each creature in a 30-foot-radius sphere centered on a point of your choice within range must make a Wisdom saving throw. On a failed save, a creature becomes frightened for the duration. The illusion calls on the creature's deepest fears, manifesting its worst nightmares as an implacable threat. At the end of each of the frightened creature's turns, it must succeed on a Wisdom saving throw or take 4d10 psychic damage. On a successful save, the spell ends for that creature.",
+		"type" : "AoE", "form" : {"range" : 120 , "shape" : "sphere", "size" : 30},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis"},
+		"conditions" : [
+			{"type" : "frightened", "whenSaved" : "endOfTurn", "savingThrow" : {"stat" : "wis"},
+				"damageOverTime" : {"damageFormula" : {"diceRoll" : {"numDice" : 4, "dieType" : 10} , "damageType" : "psychic"},
+					"whenApplied" : {"who" : "target", "whenInTurn" : "endOfTurn"}
+				}
+			}
+		]
+	},
+	{
+		"name" : "Power Word Kill", "source" : "PHB", "page" : 266,
+		"level" : 9,
+		"description" : "You utter a word of power that can compel one creature you can see within range to die instantly. If the creature you choose has 100 hit points or fewer, it dies. Otherwise, the spell has no effect.",
+		"type" : "specific", "form" : {"range" : 60 ,  "size" : 0},
+		"conditions" : [{"type" : "unconscious"}]
+	}
+]
+}

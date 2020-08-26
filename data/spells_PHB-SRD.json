@@ -1,0 +1,326 @@
+{
+"spells": [
+	{
+		"name" : "Thorn Whip", "source" : "PHB", "page" : 271,
+		"level" : 0,
+		"type" : "melee",
+		"spellAttack" : {
+			"name" : "Thorn Whip",
+			"type" : "melee", "reach" : 30,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 6} ,"damageType" : "piercing"}
+			]
+		}
+	},
+	{
+		"name" : "Arms of Hadar", "source" : "PHB", "page" : 215,
+		"level" : 1,
+		"description" : "You invoke the power of Hadar, the Dark Hunger. Tendrils of dark energy erupt from you and batter all creatures within 10 feet of you. Each creature in that area must make a Strength saving throw. On a failed save, a target takes 2d6 necrotic damage and can't take reactions until its next turn. On a successful save, the creature takes half damage, but suffers no other effect.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "sphere", "size" : 10},
+		"savingThrow" : {"stat" : "str", "damagePercentOnSave" : 50},
+		"damages" : [{"diceRoll" : {"numDice" : 2, "dieType" : 6} ,"damageType" : "necrotic",
+					"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		],
+		"conditions" : [{"type" : "noReaction", "duration" : 0}]
+	},
+	{
+		"name" : "Chromatic Orb","source" : "PHB", "page" : 221,
+		"level" : 1,
+		"description" : "You hurl a 4-inch-diameter sphere of energy at a creature that you can see within range. You choose acid, cold, fire, lightning, poison, or thunder for the type of orb you create, and then make a ranged spell attack against the target. If the attack hits, the creature takes 3d8 damage of the type you chose.",
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Chromatic Orb",
+			"type" : "ranged", "reach" : 90,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 3, "dieType" : 8}, "damageType" : "acid",
+				"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+			]
+		}
+	},
+	{
+		"name" : "Dissonant Whispers", "source" : "PHB", "page" : 234,
+		"description" : "You whisper a discordant melody that only one creature of your choice within range can hear, wracking it with terrible pain. The target must make a Wisdom saving throw. On a failed save, it takes 3d6 psychic damage and must immediately use its reaction, if available, to move as far as its speed allows away from you. The creature doesn't move into obviously dangerous ground, such as a fire or a pit. On a successful save, the target takes half as much damage and doesn't have to move away. A deafened creature automatically succeeds on the save.",
+		"level" : 1,
+		"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+		"savingThrow" : {"stat" : "wis", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 6} ,"damageType" : "psychic",
+			"damageScaling" : {"numDice" : 1, "dieType" : 6}}
+		],
+		"conditions" : [{"type" : "noReaction", "duration" : 0}]
+	},
+	{
+		"name" : "Ray of Sickness", "source" : "PHB", "page" : 271,
+		"description" : "A ray of sickening greenish energy lashes out toward a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 poison damage and must make a Constitution saving throw. On a failed save, it is also poisoned until the end of your next turn.",
+		"level" : 1,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Ray of Sickness",
+			"type" : "ranged", "reach" : 60,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 2, "dieType" : 8} ,"damageType" : "poison",
+				"damageScaling" : {"numDice" : 1, "dieType" : 8}}
+			],
+			"conditions" : [
+				{"type" : "poisoned", "duration" : 1, "savingThrow" : {"stat" : "wis"}, "whenSaved" : "initial"}
+			]
+		}
+	},
+	{
+		"name" : "Tasha's Hideous Laughter","source" : "PHB", "page" : 280,
+		"level" : 1,
+		"description" : "A creature of your choice that you can see within range perceives everything as hilariously funny and falls into fits of laughter if this spell affects it. The target must succeed on a Wisdom saving throw or fall prone, becoming incapacitated and unable to stand up for the duration. A creature with an Intelligence score of 4 or less isn't affected. At the end of each of its turns, and each time it takes damage, the target can make another Wisdom saving throw. The target has advantage on the saving throw if it's triggered by damage. On a success, the spell ends.",
+		"type" : "specific", "form" : {"range" : 30 , "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"savingThrow" : {"stat" : "wis",
+			"adjustments" : [
+				{"criterion" : "whenDamaged",  "adjustSave" : "repeatSave"}
+			]
+		},
+		"conditions" : [
+			{"type" : "incapacitated", "whenSaved" : "endOfTurn"}, {"type" : "prone", "prerequisites" : ["incapacitated"]}
+		]
+	},
+	{
+		"name" : "Witch Bolt", "source" : "PHB", "page" : 289,
+		"level" : 1,
+		"duration" : 10, "concentration" : true,
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Witch Bolt",
+			"type" : "ranged", "reach" : 30,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 1, "dieType" : 12} , "damageType" : "lightning",
+					"damageScaling" : {"numDice" : 1, "dieType" : 12}}
+			]
+		},
+		"associatedAction" : {
+			"name" : "Witch Bolt - additional",
+			"castingTime" : "action",
+			"_comment_" : "Not included: Spell ends if you do something else; has to be same target",
+			"type" : "ranged",
+			"spellAttack" : {
+				"name" : "Witch Bolt",
+				"type" : "ranged", "reach" : 30,
+				"autoHit" : true,
+				"damages" : [
+					{"diceRoll" : {"numDice" : 1, "dieType" : 12} , "damageType" : "lightning"}
+				]
+			}
+		}
+	},
+	{
+		"name" : "Cordon of Arrows","source" : "PHB", "page" : 228,
+		"level" : 2,
+		"description" : "You plant four pieces of nonmagical ammunition—arrows or crossbow bolts—in the ground within range and lay magic upon them to protect an area. Until the spell ends, whenever a creature other than you comes within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 1d6 piercing damage. The piece of ammunition is then destroyed. The spell ends when no ammunition remains.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "sphere", "size" : 30},
+		"duration" : 10, "concentration" : false, "behaviors" : [{"whenInTurn" : "entering"},{"whenInTurn" : "endOfTurn"}],
+		"savingThrow" : {"stat" : "dex"},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 1, "dieType" : 6} ,"damageType" : "piercing"}
+		]
+	},
+	{
+		"name" : "Melf's Acid Arrow", "source" : "PHB", "page" : 259,
+		"level" : 2,
+		"description" : "A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 acid damage immediately and 2d4 acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage and no damage at the end of its next turn. At Higher Levels: When you cast this spell using a spell slot of 3rd level or higher, the damage (both initial and later) increases by 1d4 for each slot level above 2nd. [Does not include the damage on miss]",
+		"type" : "ranged",
+		"spellAttack" : {
+			"name" : "Melf's Acid Arrow",
+			"type" : "ranged", "reach" : 90,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 4, "dieType" : 4} ,"damageType" : "acid",
+					"damageScaling" : {"numDice" : 1, "dieType" : 4}}
+			],
+			"conditions" : [
+				{
+					"type" : "damageOverTime", "duration" : 1,
+					"damageOverTime" : {"damageFormula" : {"diceRoll" : {"numDice" : 2, "dieType" : 4} , "damageType" : "acid",
+										"damageScaling" : {"numDice" : 1, "dieType" : 4}},
+						"whenApplied" : {"who" : "target", "whenInTurn" : "endOfTurn"}
+					}
+				}
+			]
+		}
+	},	{
+		"name" : "Phantasmal Force", "source" : "PHB", "page" : 264,
+		"description" : "You craft an illusion that takes root in the mind of a creature that you can see within range. The target must make an Intelligence saving throw. On a failed save, you create a phantasmal object, creature, or other visible phenomenon of your choice that is no larger than a 10-foot cube and that is perceivable only to the target for the duration. This spell has no effect on undead or constructs. The phantasm includes sound, temperature, and other stimuli, also evident only to the creature. The target can use its action to examine the phantasm with an Intelligence (Investigation) check against your spell save DC. If the check succeeds, the target realizes that the phantasm is an illusion, and the spell ends. While a target is affected by the spell, the target treats the phantasm as if it were real. The target rationalizes any illogical outcomes from interacting with the phantasm. For example, a target attempting to walk across a phantasmal bridge that spans a chasm falls once it steps onto the bridge. If the target survives the fall, it still believes that the bridge exists and comes up with some other explanation for its fall—it was pushed, it slipped, or a strong wind might have knocked it off. An affected target is so convinced of the phantasm's reality that it can even take damage from the illusion. A phantasm created to appear as a creature can attack the target. Similarly, a phantasm created to appear as fire, a pool of acid, or lava can burn the target. Each round on your turn, the phantasm can deal 1d6 psychic damage to the target if it is in the phantasm's area or within 5 feet of the phantasm, provided that the illusion is of a creature or hazard that could logically deal damage, such as by attacking. The target perceives the damage as a type appropriate to the illusion.",
+		"level" : 2,
+		"type" : "specific", "form" : {"range" : 60 , "shape" : "ray", "size" : 0},
+		"duration" : 10, "concentration" : true, "behaviors" : [{"whenInTurn" : "initial"},{"whenInTurn" : "endOfTurn"}],
+		"savingThrow" : {"stat" : "int",
+			"adjustments" : [
+				{"criterion" : "only", "creatureTypes": ["undead","construct"], "adjustSave" : "autoSave"}
+			]
+		},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 1, "dieType" : 6} ,"damageType" : "psychic"}
+		]
+	},
+	{
+		"name" : "Conjure Barrage","source" : "PHB", "page" : 225,
+		"level" : 3,
+		"description" : "You throw a nonmagical weapon or fire a piece of nonmagical ammunition into the air to create a cone of identical weapons that shoot forward and then disappear. Each creature in a 60-foot cone must succeed on a Dexterity saving throw. A creature takes 3d8 damage on a failed save, or half as much damage on a successful one. The damage type is the same as that of the weapon or ammunition used as a component.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "cone", "size" : 60},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 8} , "damageType" : "piercing"}
+		]
+	},
+	{
+		"name" : "Hunger of Hadar","source" : "PHB", "page" : 251,
+		"level" : 3,
+		"description" : "You open a gateway to the dark between the stars, a region infested with unknown horrors. A 20-foot-radius sphere of blackness and bitter cold appears, centered on a point within range and lasting for the duration. This void is filled with a cacophony of soft whispers and slurping noises that can be heard up to 30 feet away. No light, magical or otherwise, can illuminate the area, and creatures fully within the area are blinded. The void creates a warp in the fabric of space, and the area is difficult terrain. Any creature that starts its turn in the area takes 2d6 cold damage. Any creature that ends its turn in the area must succeed on a Dexterity saving throw or take 2d6 acid damage as milky, otherworldly tentacles rub against it.",
+		"type" : "AoE", "form" : {"range" : 150 , "shape" : "sphere", "size" : 20},
+		"duration" : 10, "concentration" : true,
+		"damages" : [
+			{"diceRoll" : {"numDice" : 2, "dieType" : 6} ,"damageType" : "cold"}
+		],
+		"behaviors" : [{"whenInTurn" : "startOfTurn"},
+			{"whenInTurn" : "endOfTurn",
+				"savingThrow" : {"stat" : "dex"},
+				"damages" : [
+					{"diceRoll" : {"numDice" : 2, "dieType" : 6} , "damageType" : "acid", "savingThrow" : {"stat" : "dex"}}
+				]
+			}
+		]
+	},
+	{
+		"name" : "Lightning Arrow", "source" : "PHB", "page" : 255,
+		"level" : 3,
+		"description" : "The next time you make a ranged weapon attack during the spell's duration, the weapon's ammunition, or the weapon itself if it's a thrown weapon, transforms into a bolt of lightning. Make the attack roll as normal. The target takes 4d8 lightning damage on a hit, or half as much damage on a miss, instead of the weapon's normal damage. Whether you hit or miss, each creature within 10 feet of the target must make a Dexterity saving throw. Each of these creatures takes 2d8 lightning damage on a failed save, or half as much damage on a successful one. The piece of ammunition or weapon then returns to its normal form.",
+		"type" : "ranged",
+		"castingTime" : "action",
+		"spellAttack" : {
+			"name" : "Lightning Arrow",
+			"type" : "ranged", "reach" : 300,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 4, "dieType" : 8} , "damageType" : "lightning"},
+				{"diceRoll" : {"numDice" : 2, "dieType" : 8} , "damageType" : "lightning",
+					"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50}}
+			]
+		}
+	},
+	{
+		"name" : "Evard's Black Tentacles", "source" : "PHB", "page" : 238,
+		"level" : 4,
+		"description" : "Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the duration, these tentacles turn the ground in the area into difficult terrain. When a creature enters the affected area for the first time on a turn or starts its turn there, the creature must succeed on a Dexterity saving throw or take 3d6 bludgeoning damage and be restrained by the tentacles until the spell ends. A creature that starts its turn in the area and is already restrained by the tentacles takes 3d6 bludgeoning damage. A creature restrained by the tentacles can use its action to make a Strength or Dexterity check (its choice) against your spell save DC. On a success, it frees itself.",
+		"type" : "AoE", "form" : {"range" : 90 , "shape" : "sphere", "size" : 20},
+		"duration" : 10, "concentration" : true, "behaviors" : [{"whenInTurn" : "entering"},{"whenInTurn" : "startOfTurn"}],
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 3, "dieType" : 6} ,"damageType" : "bludgeoning"}
+		],
+		"conditions" : [
+			{"type" : "restrained", "duration" : 10, "savingThrow" : {"stat" : "str"}, "whenSaved" : "action"}
+		]
+	},
+	{
+		"name" : "Mordenkainen's Faithful Hound","source" : "PHB", "page" : 261,
+		"level" : 4,
+		"description" : "You conjure a phantom watchdog in an unoccupied space that you can see within range, where it remains for the duration, until you dismiss it as an action, or until you move more than 100 feet away from it. The hound is invisible to all creatures except you and can't be harmed. When a Small or larger creature comes within 30 feet of it without first speaking the password that you specify when you cast this spell, the hound starts barking loudly. The hound sees invisible creatures and can see into the Ethereal Plane. It ignores illusions. At the start of each of your turns, the hound attempts to bite one creature within 5 feet of it that is hostile to you. The hound's attack bonus is equal to your spellcasting ability modifier + your proficiency bonus. On a hit, it deals 4d8 piercing damage.",
+		"type" : "melee","form" : {"range" : 30 , "shape" : "cylinder", "size" : 10},
+		"duration" : 4800, "behaviors" : [{"whenInTurn" : "startOfTurn"}],
+		"damages" : [
+			{"diceRoll" : {"numDice" : 4, "dieType" : 8} , "damageType" : "piercing"}
+		]
+	},
+	{
+		"name" : "Bigby's Hand","source" : "PHB", "page" : 218,
+		"level" : 5,
+		"description" : "You create a Large hand of shimmering, translucent force in an unoccupied space that you can see within range. The hand lasts for the spell's duration, and it moves at your command, mimicking the movements of your own hand. The hand is an object that has AC 20 and hit points equal to your hit point maximum. If it drops to 0 hit points, the spell ends. It has a Strength of 26 (+8) and a Dexterity of 10 (+0). The hand doesn't fill its space. When you cast the spell and as a bonus action on your subsequent turns, you can move the hand up to 60 feet and then cause one of the following effects with it. Clenched Fist. The hand strikes one creature or object within 5 feet of it. Make a melee spell attack for the hand using your game statistics. On a hit, the target takes 4d8 force damage...At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the damage from the clenched fist option increases by 2d8 and the damage from the grasping hand increases by 2d6 for each slot level above 5th.",
+		"type" : "melee","form" : {"range" : 120 , "shape" : "dart", "size" : 0},
+		"duration" : 10, "concentration" : true,
+		"spellAttack" : {
+			"name" : "Bigby's Hand",
+			"type" : "melee",
+			"damages" : [
+				{"diceRoll" : {"numDice" : 4, "dieType" : 8} , "damageType" : "force",
+					"damageScaling" : {"numDice" : 2, "dieType" : 8}
+				}
+			]
+		},
+		"associatedAction" : {
+			"name" : "Bigby's Hand - additional",
+			"castingTime" : "bonusAction",
+			"type" : "melee",
+			"spellAttack" : {
+				"name" : "Bigby's Hand - additional",
+				"type" : "melee",
+				"damages" : [
+					{"diceRoll" : {"numDice" : 4, "dieType" : 8} , "damageType" : "force",
+						"damageScaling" : {"numDice" : 2, "dieType" : 8}
+					}
+				]
+			}
+		}
+	},
+	{
+		"name" : "Conjure Volley","source" : "PHB", "page" : 226,
+		"level" : 5,
+		"description" : "You fire a piece of nonmagical ammunition from a ranged weapon or throw a nonmagical weapon into the air and choose a point within range. Hundreds of duplicates of the ammunition or weapon fall in a volley from above and then disappear. Each creature in a 40-foot-radius, 20-foot-high cylinder centered on that point must make a Dexterity saving throw. A creature takes 8d8 damage on a failed save, or half as much damage on a successful one. The damage type is the same as that of the ammunition or weapon.",
+		"type" : "AoE","form" : {"range" : 150 , "shape" : "cylinder", "size" : 40},
+		"savingThrow" : {"stat" : "dex", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 8, "dieType" : 8} , "damageType" : "piercing"}
+		]
+	},
+	{
+		"name" : "Destructive Wave","source" : "PHB", "page" : 231,
+		"level" : 5,
+		"description" : "You strike the ground, creating a burst of divine energy that ripples outward from you. Each creature you choose within 30 feet of you must succeed on a Constitution saving throw or take 5d6 thunder damage, as well as 5d6 radiant or necrotic damage (your choice), and be knocked prone. A creature that succeeds on its saving throw takes half as much damage and isn't knocked prone.",
+		"type" : "AoE", "form" : {"range" : 0 , "shape" : "sphere", "size" : 30},
+		"savingThrow" : {"stat" : "con", "damagePercentOnSave" : 50},
+		"damages" : [
+			{"diceRoll" : {"numDice" : 5, "dieType" : 6} ,"damageType" : "thunder"},
+			{"diceRoll" : {"numDice" : 5, "dieType" : 6} ,"damageType" : "radiant"}
+		],
+		"conditions" : [{"type" : "prone", "whenSaved" : "startOfTurn"}]
+	},
+	{
+		"name" : "Swift Quiver", "source" : "PHB", "page" : 279,
+		"level" : 5,
+		"description" : "You transmute your quiver so it produces an endless supply of nonmagical ammunition, which seems to leap into your hand when you reach for it. On each of your turns until the spell ends, you can use a bonus action to make two attacks with a weapon that uses ammunition from the quiver. Each time you make such a ranged attack, your quiver magically replaces the piece of ammunition you used with a similar piece of nonmagical ammunition. Any pieces of ammunition created by this spell disintegrate when the spell ends. If the quiver leaves your possession, the spell ends.",
+		"castingTime" : "bonusAction",
+		"duration" : 10, "concentration" : true,
+		"type" : "ranged",
+		"associatedAction" : 	{
+			"name" : "Swift Quiver - additional",
+			"castingTime" : "bonusAction",
+			"type" : "ranged",
+			"spellAttack" : {
+				"name" : "Swift Quiver - additional",
+				"type" : "ranged", "reach" : 300,
+				"damages" : [
+					{"diceRoll" : {"numDice" : 2, "dieType" : 8} , "damageType" : "piercing"}
+				]
+			}
+		}
+	},
+	{
+		"name" : "Mordenkainen's Sword", "source" : "PHB", "page" : 289,
+		"level" : 7, "description" : "You create a sword-shaped plane of force that hovers within range. It lasts for the duration. When the sword appears, you make a melee spell attack against a target of your choice within 5 feet of the sword. On a hit, the target takes 3d10 force damage. Until the spell ends, you can use a bonus action on each of your turns to move the sword up to 20 feet to a spot you can see and repeat this attack against the same target or a different one.",
+		"type" : "melee",
+		"duration" : 10, "concentration" : true,
+		"spellAttack" : {
+			"name" : "Mordenkainen's Sword",
+			"type" : "melee", "reach" : 60,
+			"damages" : [
+				{"diceRoll" : {"numDice" : 3, "dieType" : 10} , "damageType" : "force"}
+			]
+		},
+		"associatedAction" : 	{
+			"name" : "Mordenkainen's Sword - additional",
+			"castingTime" : "bonusAction",
+			"type" : "melee",
+			"spellAttack" : {
+				"name" : "Mordenkainen's Sword",
+				"type" : "melee", "reach" : 60,
+				"damages" : [
+					{"diceRoll" : {"numDice" : 3, "dieType" : 10} , "damageType" : "force"}
+				]
+			}
+		}
+	}
+]
+}

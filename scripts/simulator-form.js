@@ -1,6 +1,7 @@
-"use strict";
-
 import {Simulation} from './Simulation.js';
+import {MODULE_NAME} from './simulator.js';
+import {Spell} from './Spell.js';
+import {printError} from './Globals.js';
 
 const FRIENDLY = 1;
 const HOSTILE = -1;
@@ -70,46 +71,48 @@ export class CombatSimulatorApplication extends Application {
     //Called prior to rendering
     //Split combatants for the viewed Combat into friendly and hostile based on Token Disposition
     setActiveCombat(activeCombat) {
-      this.currentCombat = activeCombat;
+        this.currentCombat = activeCombat;
 
-      if (this.currentCombat) {
-        console.log(this.currentCombat);
-        this.combatants = this.currentCombat.data.combatants;
-  // FIXME: Recover if there are tokens with not actor or disposition info (not sure how it happens but it has)
+        if (this.currentCombat) {
+            console.log(this.currentCombat);
+            this.combatants = this.currentCombat.data.combatants;
+      // FIXME: Recover if there are tokens with not actor or disposition info (not sure how it happens but it has)
 
-        this.friendlies = this.combatants.filter(combatant => (combatant.token.disposition === FRIENDLY));
-        this.hostiles = this.combatants.filter(combatant => (combatant.token.disposition === HOSTILE));
+            this.friendlies = this.combatants.filter(combatant => (combatant.token.disposition === FRIENDLY));
+            this.hostiles = this.combatants.filter(combatant => (combatant.token.disposition === HOSTILE));
 
-        //Must have at least one Hostile and one Friendly for a fight!
-        if (!this.friendlies.length || !this.hostiles.length) {
-          ui.notifications.warn(game.i18n.localize("CS5e.ERROR.NeedBothSides"));
-          return;
+            //Must have at least one Hostile and one Friendly for a fight!
+            if (!this.friendlies.length || !this.hostiles.length) {
+              ui.notifications.warn(game.i18n.localize("CS5e.ERROR.NeedBothSides"));
+              return;
+            }
+
+            console.log(game.i18n.localize("CS5e.TOKEN.Friendly"));
+            this.friendlies.forEach((pc, i) => {
+                console.log(pc.name);
+            });
+            console.log(game.i18n.localize("CS5e.TOKEN.Hostile"));
+            this.hostiles.forEach((npc, i) => {
+                console.log(npc.name);
+            });
+
+            this.calcXPThresholds();
+            this.calcRating();
+
+        } else {
+            ui.notifications.warn(game.i18n.localize("CS5e.ERROR.CreateEncounterFirst"));
         }
-
-        console.log(game.i18n.localize("CS5e.TOKEN.Friendly"));
-        this.friendlies.forEach((pc, i) => {
-            console.log(pc.name);
-        });
-        console.log(game.i18n.localize("CS5e.TOKEN.Hostile"));
-        this.hostiles.forEach((npc, i) => {
-            console.log(npc.name);
-        });
-
-        this.calcXPThresholds();
-        this.calcRating();
-
-      } else {
-        ui.notifications.warn(game.i18n.localize("CS5e.ERROR.CreateEncounterFirst"));
-      }
-
     }
+
+
 
     simulate(numberOfSimulations, showCombatDetail) {
-      var simulation = new Simulation(numberOfSimulations, showCombatDetail, this.friendlies, this.hostiles, "Friendlies", "Hostiles");
-      var summaryOutput = "";
-      var detailOutput = "";
-      this.simulationResults = simulation.run(summaryOutput, detailOutput);
+        var simulation = new Simulation(numberOfSimulations, showCombatDetail, this.friendlies, this.hostiles, "Friendlies", "Hostiles");
+        var summaryOutput = "";
+        var detailOutput = "";
+        this.simulationResults = simulation.run(summaryOutput, detailOutput);
     }
+
 
     async getData() {
       let showCombatDetail = game.settings.get("combat-simulator","showCombatDetail");
