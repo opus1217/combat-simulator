@@ -3,22 +3,20 @@
 //  8/17/2020   Created/Copied
 
 //Singleton class for globally managing detail output
-var Output = {
+export const Output =  {
     _isEnabled : false,
     _output : "",
 
-    add : function(...strings) {
+    add(...strings) {
       this._output += strings.join('');
     },
 
-    initialize : function() {
+    initialize() {
       this._output = "";
       this._isEnabled = true;
     },
 
-    get : function() {
-      return this.output;
+    get output() {
+      return this._output;
     }
-
-
 }

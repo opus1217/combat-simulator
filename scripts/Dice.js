@@ -3,7 +3,7 @@
 // 8/10/2020: Copied/recreated
 
 
-/*export*/ class Dice {
+class Dice {
   constructor() {
     this.nothing = 0;
   }
@@ -15,3 +15,5 @@
   }
 
 }
+
+export {Dice};

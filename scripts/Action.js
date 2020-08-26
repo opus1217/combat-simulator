@@ -7,7 +7,6 @@
 
 class Recharge {
 
-
   static checkOrRollRecharge(actionRecharge) {
     if (!actionRecharge) {
       actionRecharge.isRecharged = true;
@@ -15,10 +14,20 @@ class Recharge {
   }
 }
 
+export const ActionType = {
+    action : "action",
+    bonusAction : "bonus action",
+    reaction : "reaction"
+}
 
+export const AttackType = {
+    melee : "melee",
+    ranged : "ranged",
+    AoE : "AoE",
+    specific : "specific"
+}
 
-
-class Action {
+export class Action {
   constructor() {
     this.recharge = new Recharge();
   }

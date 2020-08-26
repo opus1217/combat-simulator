@@ -1,4 +1,10 @@
 "use strict";
+
+import {Output} from './Globals.js';
+import {Combatant, WhenInTurn} from './Combatant.js';
+import {Spell} from './Spell.js';
+import {Condition, ConditionType, CombatantCondition} from './Condition.js';
+
 /*
 Created from Simulation.swift
 8/8/2020  Created
@@ -8,7 +14,7 @@ const TEAM_FRIENDLIES_DEFAULT = "Friendlies";
 const TEAM_HOSTILES_DEFAULT = "Hostiles";
 
 
-class Simulation {
+export class Simulation {
   constructor(numberOfSimulations, showDetail, friendlies, hostiles, friendlyTeamName, hostileTeamName) {
     this.numberOfSimulations = (numberOfSimulations > 0) ? numberOfSimulations : 1;
     this.showDetail = showDetail;
@@ -66,7 +72,7 @@ class Simulation {
           CombatantCondition.decrementDurationOnThisInitiative(combatant.initiative, WhenInTurn.startOfTurn, waveCombatants);
           combatant.takeTurn(activeEffects, waveCombatants);
           deadTeam = Simulation.teamIsDead(waveCombatants);
-          if (deadTeam) break;
+          if (deadTeam) {break;}
 
           //Legendary actions
           //Check to see if there are legendary actions that can be used (only at the end of somebody else's turn)
@@ -78,7 +84,7 @@ class Simulation {
           }
           CombatantCondition.decrementDurationOnThisInitiative(combatant.initiative, WhenInTurn.endOfTurn, waveCombatants);
         }//end for combatants in initiative ordering
-        if (deadTeam) break;
+        if (deadTeam) {break;}
       }//end for roundNum
       summaryOutput += simulationSummary;
       detailOutput += simulationDetail;

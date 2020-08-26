@@ -1,12 +1,12 @@
 "use strict";
-/*
-import Ability from './Creature.js';
-import Spell from './Spell.js';
-import Output from './Globals.js';
-import Dice from './Dice.js';
-import Action from './Action.js';
-import {Condition, ConditionType} from './Condition.js';
-*/
+
+import {Ability, Creature, Feature, SkillName} from './Creature.js';
+import {Spell} from './Spell.js';
+import {Output} from './Globals.js';
+import {Dice} from './Dice.js';
+import {Action} from './Action.js';
+import {Condition, ConditionType, CombatantCondition} from './Condition.js';
+
 
 //Created from Combatant.swift
 //  8/8/2020    Copied/created
@@ -179,8 +179,9 @@ class Combatant {
 
   rollInitiative() {
 		//Should have been created by the time we get here but...
-    //Use the dex value if initiative is not set
-		let initiativeBonus = this.creature.getSkillBonus(SkillName.initiative) || this.creature.getAbilityModifier(Ability.dex);
+        //Use the dex value if initiative is not set
+		let initiativeBonus = this.creature.getSkillBonus(SkillName.initiative)
+		if (initiativeBonus === undefined) {initiativeBonus = this.creature.getAbilityModifier(Ability.dex);}
 		return Dice.rolld20() + initiativeBonus;
 	}
 
@@ -231,3 +232,5 @@ class Combatant {
 
 
 }//end class Combatant
+
+export {WhenInTurn, Combatant};

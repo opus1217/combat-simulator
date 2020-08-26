@@ -1,8 +1,11 @@
 "use strict";
+
+import {Simulation} from './Simulation.js';
+
 const FRIENDLY = 1;
 const HOSTILE = -1;
 
-class CombatSimulatorApplication extends Application {
+export class CombatSimulatorApplication extends Application {
     constructor(Combat, options = {}) {
         super(options);
         if (!game.user.isGM) return;
@@ -445,7 +448,7 @@ class CombatSimulatorApplication extends Application {
 
 }
 
-class CombatSimulatorSettings extends FormApplication {
+export class CombatSimulatorSettings extends FormApplication {
   /** @override */
 	static get defaultOptions() {
     return mergeObject(super.defaultOptions, {

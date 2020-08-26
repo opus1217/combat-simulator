@@ -55,8 +55,6 @@ const ConditionType = {
 
 class CombatantCondition {
 
-
-
   checkToRemoveConditionsWhereSourceLostConcentration(combatants) {
     for (let combatant of combatants) {
       combatant.conditions.forEach((element, index) => {
@@ -71,6 +69,8 @@ class CombatantCondition {
   }
 
   static checkToRemoveConditionsWhereSourceLostConcentration(combatants) {
-    
+
   }
 }
+
+export {Condition, ConditionType, CombatantCondition};

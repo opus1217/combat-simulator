@@ -1,9 +1,12 @@
 "use strict";
+import {DamageType} from './Damage.js';
+import {SpellBook} from './Spell.js';
 //Created
-//  8/10/2020  Copied/created, stubbed out
+//  8/10/2020   Copied/created, stubbed out
+//  8/20/2020   Added CreatureClass, SpellBook
 
 //ENUMS
-/*export*/ const Ability = {
+const Ability = {
   str : "str",
   dex : "dex",
   con : "con",
@@ -12,7 +15,7 @@
   cha : "cha"
 }
 
-/*export*/ const SkillName = {
+const SkillName = {
 	athletics : "athletics",
 	stealth : "stealth",
   acrobatics : "athletics",
@@ -62,12 +65,25 @@ const Race =  {
 }
 */
 
+class CreatureClass {
+  constructor() {
+    this.classType = null;
+    this.subClass = "";
+    this.level = null;
+    this.spellBook = null;
+  }
+}
 
-/*export*/ class Creature {
+
+export class Creature {
   constructor(actor) {
     this.actor = actor;
     if (actor) {
       let creatureData = actor.data.data;
+      let feats = actor.items.filter(item => {return item.type === "feat"});
+      let weapons = actor.items.filter(item => {return item.type === "weapon"});
+      let spells = actor.items.filter(item => {return item.type === "spell"});
+
 
       //AC and HP
       this.ac = creatureData.attributes.ac.value;
@@ -84,17 +100,64 @@ const Race =  {
           this.saves[key] = creatureData.abilities[key].save;
       }
 
+      //VULNERABILITIES, RESISTANCES etc.
+      let traits = creatureData.traits;
+      if (traits) {
+          let size = traits.size.toUpperCase()[0];
+          this.size = SizeType[size];
+
+          let resistances = traits.dr;
+          if (resistances && resistances.length) {
+              this.resistances = [];
+              resistances.forEach((dr, i) => {
+                this.resistances.push(DamageType[dr]);
+              });
+          }
+
+          let immunities = traits.di;
+          if (immunities && immunities.length) {
+              this.immunities = [];
+              immunities.forEach((di, i) => {
+                this.immunities.push(DamageType[di]);
+              });
+          }
+
+          let vulnerabilities = traits.dv;
+          if (vulnerabilities && vulnerabilities.length) {
+              this.vulnerabilities = [];
+              vulnerabilities.forEach((dv, i) => {
+                this.vulnerabilities.push(DamageType[dv]);
+              });
+          }
+
+          let conditionImmunities = traits.ci;
+          if (conditionImmunities && conditionImmunities.length) {
+              this.conditionImmunities = [];
+              conditionImmunities.forEach((ci, i) => {
+                this.conditionImmunities.push(DamageType[ci]);
+              });
+          }
+      }
+
       //SKILLS
       this.skills = [];
       this.skills[SkillName.initiative] = creatureData.attributes.init.mod;
 
       //SPELLBOOKS
-
+      let abilityObj = creatureData.abilities[creatureData.attributes.spellcasting];
+      if (abilityObj) {
+          let bonusToAttack = abilityObj.mod + abilityObj.prof;
+          this.spellBook = new SpellBook(bonusToAttack, creatureData.attributes.spelldc, spells);
+      }
 
       //SPELL SLOTS
       this.spellSlots = [];
       for (let slot=1; slot<=9; slot++) {
         this.spellSlots.push(creatureData.spells["spell"+slot].value);
+      }
+      //Add in Pact slots if you have them
+      if (creatureData.spells.pact) {
+          this.spellSlots[creatureData.spells.pact.level - 1] += creatureData.spells.pact.value;
       }
     }
   }
@@ -131,3 +194,5 @@ const Race =  {
     return null;
   }
 }//end class Feature
+
+export {Ability, Feature, SkillName};

@@ -1,3 +1,4 @@
+import {CombatSimulatorApplication} from './simulator-form.js';
 const MODULE_NAME = "combat-simulator"
 //Global variable for combatTrackerSimulate
 
